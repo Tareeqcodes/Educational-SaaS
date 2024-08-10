@@ -1,4 +1,5 @@
 import React from 'react'
+import LoginBtn from './LoginBtn'
 
 const Navbar = () => {
   return (
@@ -11,7 +12,7 @@ const Navbar = () => {
           <li><a href="#premium">Home</a></li>
           <li><a href="airbnb.html">Rental</a></li>
           <li><a href="payment.html">Profile</a></li>
-          <li><a href="sign.html" target="_blank">login</a></li>
+          <li><LoginBtn /></li>
         </ul>
     </nav>
     </>
