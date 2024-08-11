@@ -4,11 +4,14 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App.jsx'
 import './index.css'
 
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;;
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider
-    domain="dev-3ezl73rgdmqgh4zn.eu.auth0.com"
-    clientId="h4LSN7EiPLBqRFy7k46Gzda2HgiJQwBJ"
+    domain={domain}
+    clientId={clientId}
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
