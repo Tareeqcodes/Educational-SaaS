@@ -14,9 +14,7 @@ const Hero = () => {
             placeholder="Search PDFs+ AI Tools"
             className="p-2 mt-auto border border-black rounded w-full md:w-auto flex-grow md:mr-4 mb-4 md:mb-0"
           />
-          <button className="bg-blue-500 text-white p-2 rounded w-full md:w-auto">
-            Search
-          </button>
+         
         </div>
         <div className="flex flex-wrap justify-center mb-4 space-x-2">
           
