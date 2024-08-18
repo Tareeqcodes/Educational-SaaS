@@ -6,13 +6,13 @@ const Navbar = () => {
     <>
      
     <nav
-      className="bg-orange-500 text-black flex flex-row text-center justify-between  w-full items-end border-b-2 border-slate-400 fixed z-0"
+      className="bg-orange-500 text-white flex flex-row text-center justify-between  w-full p-4 fixed z-0"
     >
       <>
-        <span className='text-2xl m-0 text-blue-950'>EDUSPHERE</span>
+        <span className='text-2xl'>EDUSPHERE</span>
       </>
       <div>
-        <ul className="flex flex-row items-center justify-evenly p-4 space-x-8">
+        <ul className="flex flex-row items-center justify-evenly space-x-2">
           <li><a href="#premium">Home</a></li>
           <li><a href="airbnb.html">Rental</a></li>
           <li><a href="payment.html">Profile</a></li>

@@ -7,14 +7,6 @@ const Hero = () => {
         <div
           className="flex flex-col md:flex-row justify-between items-center mb-4 mt-16"
         >
-        
-          <input
-            id="search"
-            type="text"
-            placeholder="Search PDFs+ AI Tools"
-            className="p-2 mt-auto border border-black rounded w-full md:w-auto flex-grow md:mr-4 mb-4 md:mb-0"
-          />
-         
         </div>
         <div className="flex flex-wrap justify-center mb-4 space-x-2">
           
