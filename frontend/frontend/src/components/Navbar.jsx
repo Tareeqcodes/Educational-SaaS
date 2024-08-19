@@ -9,7 +9,7 @@ const Navbar = () => {
       className="bg-orange-500 text-white flex flex-row text-center justify-between  w-full p-4 fixed z-0"
     >
       <>
-        <span className='text-2xl'>EDUSPHERE</span>
+        <span className='text-2xl italic'>EDUSPHERE</span>
       </>
       <div>
         <ul className="flex flex-row items-center justify-evenly space-x-2">
