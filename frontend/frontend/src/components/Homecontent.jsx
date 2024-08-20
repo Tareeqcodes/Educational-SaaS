@@ -18,7 +18,7 @@ const Homecontent = () => {
       <section className="py-16 px-4">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Why Choose Edusphere?
-        </h2>
+        </h2> 
         <div className="flex flex-wrap justify-center">
           <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden m-4">
             <div className="px-6 py-4">
@@ -92,17 +92,6 @@ const Homecontent = () => {
           </div>
         </div>
       </section>
-
-      {/* Call to Action Section */}
-      {/* <section className="bg-blue-600 text-white py-16 text-center">
-        <h2 className="text-3xl font-bold mb-4">Get Started Today</h2>
-        <p className="text-lg mb-8">
-          Whether you’re a student eager to learn, an educator seeking innovative teaching tools, or an institution looking to modernize, Edusphere is here to support you.
-        </p>
-        <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-full">
-          Join Edusphere
-        </button>
-      </section> */}
     </div>
   );
 }
