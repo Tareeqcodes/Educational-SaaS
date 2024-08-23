@@ -1,7 +1,8 @@
 import React from 'react'
-import {Outlet, NavLink} from 'react-router-dom'
 import LoginBtn from './LoginBtn'
 import FacultyDropdown from './FacultyDropdown'
+
+
 const Navbar = () => {
   return (
     <>
@@ -13,15 +14,14 @@ const Navbar = () => {
       </>
       <div>
         <ul className="flex flex-row items-center justify-evenly space-x-5">
-          <li><NavLink to='/'>Home</NavLink></li>
+          <li><a href="">Home</a></li>
            <li><FacultyDropdown /></li>
-          <li><NavLink to='/rental'>Rental</NavLink></li>
-          <li><NavLink to='/profile'>Profile</NavLink></li>
+          <li><a href="/rental">Rental</a></li>
+          <li><a href="/rental">Profile</a></li>
           <li><LoginBtn /></li>
         </ul>
         </div>
     </nav>
-    <Outlet />
     </>
     
   )

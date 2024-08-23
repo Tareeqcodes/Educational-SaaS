@@ -1,21 +1,9 @@
 import React from 'react'
-import FacultyCards from './FacultyCards';
+
 
 const Homecontent = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Hero Section */}
-      <header className="bg-blue-600 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold">Welcome to Edusphere</h1>
-        <p className="mt-4 text-lg">
-          Your Gateway to Future-Ready Education
-        </p>
-        <button className="mt-8 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full">
-          Get Started
-        </button>
-      </header>
-
-      {/* Why Choose Edusphere */}
       <section className="py-16 px-4">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Why Choose Edusphere?
@@ -29,7 +17,6 @@ const Homecontent = () => {
               </p>
             </div>
           </div>
-
           <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden m-4">
             <div className="px-6 py-4">
               <h3 className="font-bold text-xl mb-2">Interactive Learning Tools</h3>
@@ -93,7 +80,6 @@ const Homecontent = () => {
           </div>
         </div>
       </section>
-      <FacultyCards />
     </div>
   );
 }
