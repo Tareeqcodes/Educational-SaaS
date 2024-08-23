@@ -1,4 +1,5 @@
 import React from 'react'
+import FacultyCards from './FacultyCards';
 
 const Homecontent = () => {
   return (
@@ -92,6 +93,7 @@ const Homecontent = () => {
           </div>
         </div>
       </section>
+      <FacultyCards />
     </div>
   );
 }
