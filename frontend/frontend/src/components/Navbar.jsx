@@ -18,6 +18,7 @@ const Navbar = () => {
            <li><FacultyDropdown /></li>
           <li><a href="/rental">Rental</a></li>
           <li><a href="/rental">Profile</a></li>
+          <li><a href="/campconnect">Campusnet</a></li>
           <li><LoginBtn /></li>
         </ul>
         </div>
