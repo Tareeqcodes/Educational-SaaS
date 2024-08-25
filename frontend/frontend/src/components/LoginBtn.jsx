@@ -1,12 +1,12 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react'
 
 const LoginBtn = () => {
-    const { loginWithRedirect } = useAuth0();
+  
   return (
-    <>
-    <button onClick={() => loginWithRedirect()}>Login</button>
-    </>
+    <div className='pointer'>
+      <h1>Sign In</h1>
+      <div id="firebaseui-auth-container"></div>
+    </div>
   )
 }
 

@@ -9,3 +9,8 @@ Currently, two official plugins are available:
 
 
 #lazy loading in react lazy()
+
+Using Auth0 and vite-create@latest
+
+#const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;;
