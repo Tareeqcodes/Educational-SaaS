@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
     <nav
-      className="bg-orange-500 text-white flex flex-row text-center justify-between w-full m-auto p-5 py-4 fixed z-0"
+      className="bg-slate-800 text-white flex flex-row text-center justify-between w-full m-auto px-20 py-4 fixed z-0"
     >
       <>
         <span className='text-2xl italic'>EDUSPHERE</span>

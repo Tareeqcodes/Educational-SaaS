@@ -1,5 +1,6 @@
-
-import { auth } from './FireBase';
+// Import necessary modules
+import { useEffect } from 'react';
+import { app, auth } from './FireBase';
 import firebase from 'firebase/compat/app';
 import 'firebaseui/dist/firebaseui.css';
 import * as firebaseui from 'firebaseui';
@@ -14,9 +15,10 @@ const uiConfig = {
   ],
 };
 
-// Initialize the FirebaseUI widget using Firebase
+// Initialize FirebaseUI
 const ui = new firebaseui.auth.AuthUI(auth);
 
+// Start FirebaseUI on the given element ID
 export const startFirebaseUI = (elementId) => {
   ui.start(elementId, uiConfig);
 };
