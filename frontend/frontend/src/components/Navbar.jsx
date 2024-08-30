@@ -1,25 +1,27 @@
 import React from 'react'
-import LoginBtn from './LoginBtn'
-import Profile from './Profile'
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
   return (
     <>
     <nav
-      className="bg-slate-800 text-white flex flex-row text-center justify-between w-full m-auto px-20 py-4 fixed z-0"
+      className="bg-slate-800 text-white flex flex-row text-center justify-between w-full m-auto px-20 py-4  z-0"
     >
-      <>
-        <span className='text-2xl italic'>EDUSPHERE</span>
-      </>
-      <div>
-        <ul className="flex flex-row items-center justify-evenly space-x-5">
-          <li><a href="">Home</a></li>
-          <li><a href="/campconnect">Campusnet</a></li>
-          <li><a href="/rental">Rental</a></li>
-          <li><LoginBtn /></li>
-          <li><Profile /></li>
-        </ul>
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-xl font-bold">
+          <Link to="/">Edusphere</Link>
         </div>
+        <div>
+          <Link className="mr-4" to="/">Home</Link>
+          <Link className="mr-4" to="/pdfs">PDFs</Link>
+          <Link className="mr-4" to="/rentals">Rentals</Link>
+          <Link className="mr-4" to="/marketplace">Marketplace</Link>
+          <Link className="mr-4" to="/news">News</Link>
+          <Link className="mr-4" to="/sell-courses">Sell Courses</Link>
+          <Link to="/login">Login</Link>
+        </div>
+      </div>
     </nav>
     </>
     

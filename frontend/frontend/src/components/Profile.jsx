@@ -1,5 +1,5 @@
 import React from 'react'
-import FacultyDropdown from './FacultyDropdown'
+import FacultyDropdown from './Homepage/FacultyDropdown'
 
 const Profile = () => {
   return (
