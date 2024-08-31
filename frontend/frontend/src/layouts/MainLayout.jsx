@@ -8,7 +8,9 @@ const MainLayout = () => {
   return (
     <div>
         <Navbar />
-       <Outlet />
+        <div style={{ minHeight: 'calc(100vh - 100px)' }}> {/* Adjust the height as needed */}
+        <Outlet />
+      </div>
        <Footer />
     </div>
   )
