@@ -1,12 +1,13 @@
 import React from 'react'
 import FeatureSection from "../components/Homepage/FeatureSection";
-// import Banner from "../components/Homepage/Banner";
-
+import Hero from '../components/Homepage/Hero';
+import FeatureCards from '../components/Homepage/FeatureCards';
 const MainPage = () => {
   return (
     <div>
-        {/* <Banner /> */}
         <FeatureSection />
+        <Hero />
+        <FeatureCards />
     </div>
   )
 }

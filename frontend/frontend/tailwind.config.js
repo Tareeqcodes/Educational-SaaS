@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        peach: '#FFDAB9',
+      },
+      fontFamily: {
+        ubuntu: ['Ubuntu', 'sans-serif'], 
+      },
+      borderRadius: {
+        'custom-bl': '10px', 
+      },
+    },
   },
   plugins: [],
 }
