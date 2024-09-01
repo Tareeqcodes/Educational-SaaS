@@ -19,7 +19,6 @@ const Navbar = () => {
           <Link className="mr-4" to="/marketplace">Marketplace</Link>
           <Link className="mr-4" to="/news">News</Link>
           <Link className="mr-4" to="/sell-courses">Sell Courses</Link>
-          <Link to="/login">Login</Link>
         </div>
       </div>
     </nav>
