@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div>
+    <div className='px-16'>
         <h2 className="text-2xl text-blue-700 py-5  font-semibold ">What's <span className='text-orange-600'>Edusphere</span></h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint?</p>
         <div className="grid grid-cols-2 grid-rows-1 items-center w-full text-center justify-center p-5 gap-5">

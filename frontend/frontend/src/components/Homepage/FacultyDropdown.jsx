@@ -1,26 +1,75 @@
-import React from 'react'
-import { useState } from 'react'
+// import React from 'react'
+// import Slider from "react-slick";
 
-const FacultyDropdown = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen)
-    }
-  return (
-    <div className='relative'>
-        <button onClick={toggleDropdown} className='focus:outline-none'>
-        Departments
-        </button>
-        {isOpen && (
-             <div className="dropdown-content w-32 text-black absolute bg-white shadow-lg rounded">
-             <a href="" className="block px-4 py-2">Faculty 1</a>
-             <a href="" className="block px-4 py-2">Faculty 2</a>
-             <a href="" className="block px-4 py-2">Faculty 3</a>
-             <a href="" className="block px-4 py-2">Faculty 4</a>
-           </div>
-        )}
-    </div>
-  )
-}
 
-export default FacultyDropdown
+// const FacultyDropdown = () => {
+//   const settings = {
+//     dots: true,
+//     infinite: false,
+//     speed: 500,
+//     slidesToShow: 4,
+//     slidesToScroll: 4,
+//     initialSlide: 0,
+//     responsive: [
+//       {
+//         breakpoint: 1024,
+//         settings: {
+//           slidesToShow: 3,
+//           slidesToScroll: 3,
+//           infinite: true,
+//           dots: true
+//         }
+//       },
+//       {
+//         breakpoint: 600,
+//         settings: {
+//           slidesToShow: 2,
+//           slidesToScroll: 2,
+//           initialSlide: 2
+//         }
+//       },
+//       {
+//         breakpoint: 480,
+//         settings: {
+//           slidesToShow: 1,
+//           slidesToScroll: 1
+//         }
+//       }
+//     ]
+//   };
+//   return (
+//     <div className="slider-container">
+//       <Slider {...settings}>
+//         <div className='grid grid-cols-3'>
+
+//         <div>
+//           <h3>1</h3>
+//         </div>
+//         <div>
+//           <h3>2</h3>
+//         </div>
+//         <div>
+//           <h3>3</h3>
+//         </div>
+//         <div>
+//           <h3>4</h3>
+//         </div>
+//         <div>
+//           <h3>5</h3>
+//         </div>
+//         <div>
+//           <h3>6</h3>
+//         </div>
+//         <div>
+//           <h3>7</h3>
+//         </div>
+//         <div>
+//           <h3>8</h3>
+//         </div>
+//         </div>
+//       </Slider>
+//     </div>
+//   );
+// }
+
+// export default FacultyDropdown

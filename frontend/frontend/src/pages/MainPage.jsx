@@ -4,6 +4,8 @@ import Hero from '../components/Homepage/Hero';
 import Features from '../components/Homepage/Features/Features';
 import FeatureCards from '../components/Homepage/Features/FeatureCards';
 import About from '../components/Homepage/About';
+// import FacultyDropdown from '../components/Homepage/FacultyDropdown';
+import FacultyCards from '../components/Homepage/FacultyCards'
 const MainPage = () => {
   return (
     <div>
@@ -12,6 +14,8 @@ const MainPage = () => {
         <About />
         <Features />
         <FeatureCards />
+        {/* <FacultyDropdown /> */}
+        <FacultyCards />
     </div>
   )
 }

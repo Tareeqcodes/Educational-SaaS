@@ -3,7 +3,7 @@ import React from 'react'
 const FeatureCards = () => {
   return (
     <>
-    <div className="p-8 grid grid-cols-2 grid-rows-3 items-center my-0 mx-auto justify-center">
+    <div className="py-8 px-16 grid grid-cols-2 grid-rows-3 items-center my-0 mx-auto justify-center">
     <div className="bg-white p-4 rounded shadow">
       
       <h2 className="text-xl font-bold text-blue-700 py-5">Access Online PDFs</h2>
@@ -30,7 +30,7 @@ const FeatureCards = () => {
       <p>Create and sell your tutorials or courses online.</p>
     </div>
   </div>
-  <buttom className="font-semibold border border-orange-700 items-center justify-center rounded-xl p-2 text-xl bg-white text-orange-400">See more features</buttom>
+  <button className="font-semibold border border-orange-700 items-center justify-center rounded-xl p-2 text-xl bg-white text-orange-400">See more features</button>
   </>
   )
 }

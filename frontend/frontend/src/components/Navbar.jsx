@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+// import AuthComponent from './firebase/AuthComponent';
 
 const Navbar = () => {
   return (
     <>
     <nav
-      className="bg-peach text-black text-center font-ubuntu  w-full m-auto px-20 py-4 fixed  z-0"
+      className="bg-peach text-black text-center font-ubuntu  w-full m-auto px-16 py-4 fixed  z-0"
     >
       <div className=" mx-auto flex flex-1 justify-between items-center">
         <div className="text-2xl  font-bold">
@@ -19,6 +19,8 @@ const Navbar = () => {
           <Link className="mr-4" to="/marketplace">Marketplace</Link>
           <Link className="mr-4" to="/news">News</Link>
           <Link className="mr-4" to="/sell-courses">Sell Courses</Link>
+           <Link className="mr-4" to="/login">Login</Link> 
+          {/* <AuthComponent /> */}
         </div>
       </div>
     </nav>
