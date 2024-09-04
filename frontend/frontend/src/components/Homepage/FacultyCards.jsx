@@ -1,28 +1,29 @@
 import React from 'react'
 import Slider from 'react-slick';
+import faculty from '../../assets/images/faculty.jpg';
 // import {FaAngleRight, FaAngleLeft} from 'react-icons/fa'
 
 
 const FacultyCards = () => {
   const faculties = [
-    { name: 'Agriculture', image: 'path_to_image' },
-    { name: 'Allied Health', image: 'path_to_image' },
-    { name: 'Art and Islamic', image: 'path_to_image' },
-    { name: 'Basic Medical', image: 'path_to_image' },
-    { name: 'Clinical', image: 'path_to_image' },
-    { name: 'Communication', image: 'path_to_image' },
-    { name: 'Computing', image: 'path_to_image' },
-    { name: 'Dentistry', image: 'path_to_image' },
-    { name: 'Earth and Environmental', image: 'path_to_image' },
-    { name: 'Education', image: 'path_to_image' },
-    { name: 'Engineering', image: 'path_to_image' },
-    { name: 'Law', image: 'path_to_image' },
-    { name: 'Life Science', image: 'path_to_image' },
-    { name: 'Management Science', image: 'path_to_image' },
-    { name: 'Pharmaceutical', image: 'path_to_image' },
-    { name: 'Physical Sciences', image: 'path_to_image' },
-    { name: 'Social Sciences', image: 'path_to_image' },
-    { name: 'Veterinary', image: 'path_to_image' },
+    { name: 'Agriculture', image: faculty },
+    { name: 'Allied Health', image: faculty },
+    { name: 'Art and Islamic', image: faculty },
+    { name: 'Basic Medical', image: faculty },
+    { name: 'Clinical', image: faculty },
+    { name: 'Communication', image: faculty },
+    { name: 'Computing', image: faculty },
+    { name: 'Dentistry', image: faculty },
+    { name: 'Earth and Environmental', image: faculty },
+    { name: 'Education', image: faculty },
+    { name: 'Engineering', image: faculty },
+    { name: 'Law', image: faculty },
+    { name: 'Life Science', image: faculty },
+    { name: 'Management Science', image: faculty },
+    { name: 'Pharmaceutical', image: faculty },
+    { name: 'Physical Sciences', image: faculty },
+    { name: 'Social Sciences', image: faculty },
+    { name: 'Veterinary', image: faculty },
     
   ];
 
@@ -32,6 +33,8 @@ const FacultyCards = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
+    autoplay: true,
+    // autoplaySpeed: 1000,
     // nextArrow: <FaAngleRight className="text-orange-600" />,
     // prevArrow: <FaAngleLeft className="text-orange-600" />,
     responsive: [
@@ -45,22 +48,21 @@ const FacultyCards = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           initialSlide: 2
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
         },
       },
     ],
   }
-
   return (
     
     <div className="text-center items-center justify-center px-16 mx-auto">
@@ -73,7 +75,7 @@ const FacultyCards = () => {
               <img
                 src={faculty.image}
                 alt={faculty.name}
-                className="w-full h-48  object-cover"
+                className="w-full h-48 object-cover"
               />
               <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
                 {faculty.name}
