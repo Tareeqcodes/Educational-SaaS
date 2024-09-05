@@ -1,93 +1,70 @@
-import React from 'react'
-import Slider from 'react-slick';
-import faculty from '../../assets/images/faculty.jpg';
-// import {FaAngleRight, FaAngleLeft} from 'react-icons/fa'
-
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y  } from 'swiper/modules'; 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import faculty from '../../assets/images/faculty.jpg'
 
 const FacultyCards = () => {
   const faculties = [
-    { name: 'Agriculture', image: faculty },
-    { name: 'Allied Health', image: faculty },
-    { name: 'Art and Islamic', image: faculty },
-    { name: 'Basic Medical', image: faculty },
-    { name: 'Clinical', image: faculty },
-    { name: 'Communication', image: faculty },
-    { name: 'Computing', image: faculty },
-    { name: 'Dentistry', image: faculty },
-    { name: 'Earth and Environmental', image: faculty },
-    { name: 'Education', image: faculty },
-    { name: 'Engineering', image: faculty },
-    { name: 'Law', image: faculty },
-    { name: 'Life Science', image: faculty },
-    { name: 'Management Science', image: faculty },
-    { name: 'Pharmaceutical', image: faculty },
-    { name: 'Physical Sciences', image: faculty },
-    { name: 'Social Sciences', image: faculty },
-    { name: 'Veterinary', image: faculty },
-    
+    { name: 'Agriculture', description: 'Explore our courses in Agriculture.', image: faculty },
+    { name: 'Allied Health', description: 'Find out more about Allied Health.', image: faculty },
+    { name: 'Art and Islamic', description: 'Discover Art and Islamic studies.', image: faculty },
+    { name: 'Basic Medical', description: 'Learn about Basic Medical Sciences.', image: faculty },
+    // Add more faculties with descriptions as needed
   ];
 
-  const settings ={
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    autoplay: true,
-    // autoplaySpeed: 1000,
-    // nextArrow: <FaAngleRight className="text-orange-600" />,
-    // prevArrow: <FaAngleLeft className="text-orange-600" />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 2
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
-  }
   return (
-    
-    <div className="text-center items-center justify-center px-16 mx-auto">
-      <h2 className="text-2xl py-5 text-blue-700 font-bold mb-5">Available <span className='text-orange-600'>Faculties</span></h2>
-      <div className="px-16 w-full">
-      <Slider {...settings}>
+    <div className="text-center justify-center px-16 py-8 mx-auto">
+      <h2 className="text-3xl font-bold text-blue-700 mb-8">
+        Available <span className="text-orange-600">Faculties</span>
+      </h2>
+      <Swiper 
+        spaceBetween={10}
+        slidesPerView={3} 
+        navigation
+    modules={[Navigation, Pagination, Scrollbar, A11y]}
+    pagination={false}
+      scrollbar={{ draggable: true }}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        breakpoints={{
+          640: {
+            slidesPerView: 1, 
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2, 
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3, 
+            spaceBetween: 10,
+          },
+        }}
+      >
         {faculties.map((faculty, index) => (
-          <div key={index} className="p-2">
-            <div className="relative overflow-hidden rounded-lg shadow-lg">
+          <SwiperSlide key={index}>
+            <div className=" shadow-md text-center items-center justify-center rounded-lg mx-auto my-4 max-w-40">
+              <div className="items-center mb-4">
               <img
-                src={faculty.image}
-                alt={faculty.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
-                {faculty.name}
+                  src={faculty.image}
+                  alt={faculty.name}
+                  className="w-full h-full object-cover"
+                />
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {faculty.name}
+                </h3>
               </div>
+              <p className="text-gray-600">{faculty.description}</p>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
-      </div>
+      </Swiper>
     </div>
-    
-  )
-}
-
-export default FacultyCards
+  );
+};
+ 
+export default FacultyCards;
