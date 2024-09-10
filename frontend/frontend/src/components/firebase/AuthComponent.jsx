@@ -1,54 +1,70 @@
-// import React, { useState } from 'react';
-// import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import { app } from './FireBaseConfig';
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y  } from 'swiper/modules'; 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import faculty from '../../assets/images/faculty.jpg'
 
-// const CustomAuth = () => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const auth = getAuth(app);
-//   const googleProvider = new GoogleAuthProvider();
+const FacultyCards = () => {
+  const faculties = [
+    { name: 'Agriculture', description: 'Explore our courses in Agriculture.', image: faculty },
+    { name: 'Allied Health', description: 'Find out more about Allied Health.', image: faculty },
+    { name: 'Art and Islamic', description: 'Discover Art and Islamic studies.', image: faculty },
+    { name: 'Basic Medical', description: 'Learn about Basic Medical Sciences.', image: faculty },
+    // Add more faculties with descriptions as needed
+  ];
 
-//   const handleEmailSignIn = () => {
-//     signInWithEmailAndPassword(auth, email, password)
-//       .then((userCredential) => {
-//         // Signed in
-//         const user = userCredential.user;
-//         console.log(user);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-
-//   const handleGoogleSignIn = () => {
-//     signInWithPopup(auth, googleProvider)
-//       .then((result) => {
-//         const user = result.user;
-//         console.log(user);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-
-//   return (
-//     <div>
-//       <input
-//         type="email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//         placeholder="Email"
-//       />
-//       <input
-//         type="password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//         placeholder="Password"
-//       />
-//       <button onClick={handleEmailSignIn}>Sign in with Email</button>
-//       <button onClick={handleGoogleSignIn}>Sign in with Google</button>
-//     </div>
-//   );
-// };
-
-// export default CustomAuth;
+  return (
+    <div className="text-center justify-center px-16 py-8 mx-auto">
+      <h2 className="text-3xl font-bold text-blue-700 mb-8">
+        Available <span className="text-orange-600">Faculties</span>
+      </h2>
+      <Swiper 
+        spaceBetween={10}
+        slidesPerView={3} 
+        navigation
+    modules={[Navigation, Pagination, Scrollbar, A11y]}
+    pagination={true}
+      scrollbar={{ draggable: true }}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        breakpoints={{
+          640: {
+            slidesPerView: 1, 
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2, 
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3, 
+            spaceBetween: 10,
+          },
+        }}
+      >
+        {faculties.map((faculty, index) => (
+          <SwiperSlide key={index}>
+            <div className=" shadow-md text-center items-center justify-center rounded-lg mx-auto my-4 max-w-40">
+              <div className="items-center mb-4">
+              <img
+                  src={faculty.image}
+                  alt={faculty.name}
+                  className="w-full h-full object-cover"
+                />
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {faculty.name}
+                </h3>
+              </div>
+              <p className="text-gray-600">{faculty.description}</p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
+ 
+export default FacultyCards;
