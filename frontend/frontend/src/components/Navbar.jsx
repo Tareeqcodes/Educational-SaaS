@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-// import AuthComponent from './firebase/AuthComponent';
 
 const Navbar = () => {
   return (
@@ -15,12 +14,11 @@ const Navbar = () => {
         <div>
           <Link className="mr-4" to="/">Home</Link>
           <Link className="mr-4" to="/pdfs">PDFs</Link>
-          <Link className="mr-4" to="/rentals">Rentals</Link>
+          <Link className="mr-4" to="/rental">Rental</Link>
           <Link className="mr-4" to="/marketplace">Marketplace</Link>
           <Link className="mr-4" to="/news">News</Link>
           <Link className="mr-4" to="/sell-courses">Sell Courses</Link>
-           <Link className="mr-4" to="/login">Login</Link> 
-          {/* <AuthComponent /> */}
+          <Link className="mr-4" to="/Auth">Login</Link> 
         </div>
       </div>
     </nav>
