@@ -1,11 +1,9 @@
 import React from 'react'
-import RentalList from '../components/Rental/RentalList';
-
+import RentalMainPage from '../components/Rental/RentalMainPage'
 const Rental = () => {
   return (
     <div>
-      
-      <RentalList />
+      <RentalMainPage />
     </div>
   )
 }
