@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-const RentalCard = ({ name, location }) => {
-  return (
-    <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-xl font-bold">{name}</h3>
-      <p>{location}</p>
-      <button className="bg-blue-500 text-white mt-2 px-4 py-2 rounded">View Details</button>
-=======
 import React, { useState } from 'react';
 import PropertyUpload from './PropertyUpload'; // Assuming you've created the PropertyUpload component
 import PropertyList from './PropertyList'; // Assuming you've created the PropertyList component
@@ -55,13 +45,9 @@ const RentalMainPage = () => {
         // Show the property list when 'Available for Rent' is clicked
         <PropertyList />
       )}
->>>>>>> aec183d0f2837624793295e1f543c8ed184e07f9
+
     </div>
   );
 };
 
-<<<<<<< HEAD
-export default RentalCard;
-=======
 export default RentalMainPage;
->>>>>>> aec183d0f2837624793295e1f543c8ed184e07f9
