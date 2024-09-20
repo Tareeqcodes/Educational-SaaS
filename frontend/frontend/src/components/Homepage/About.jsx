@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div className='flex flex-col items-center justify-center px-4 py-10'>  {/* Centering the entire section */}
+    <div className='flex flex-col items-center justify-center py-10'>  
       <h2 className="text-blue-700 font-bold text-4xl py-5">
         What's <span className='text-orange-600'>Edusphere</span>
       </h2>
