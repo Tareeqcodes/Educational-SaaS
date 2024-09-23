@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { app } from '../firebase/FireBaseConfig';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between sign-up and sign-in
@@ -21,6 +22,14 @@ const AuthForm = () => {
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
   const db = getFirestore(app);
+
+  const resetForm = () =>{
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setRole('student');
+    setErrors('');
+  };
 
   const validateEmail = () => {
     if (role === 'lecturer' && !email.endsWith('@lecturer.university.edu')) {
@@ -81,6 +90,7 @@ const AuthForm = () => {
       await setDoc(userRef, { role }, { merge: true });
       console.log('Signed up user:', user);
       console.log('User role:', role);
+      resetForm();
       // Optionally, redirect the user or reset the form here
     } catch (error) {
       console.error('Error during sign-up:', error);
@@ -101,6 +111,7 @@ const AuthForm = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      resetForm();
       console.log('Signed in user:', user);
       // Optionally, redirect the user here
     } catch (error) {
@@ -120,6 +131,7 @@ const AuthForm = () => {
       const user = result.user;
       const userRef = doc(db, 'users', user.uid);
       await setDoc(userRef, { role }, { merge: true });
+      resetForm();
       console.log('Signed in with Google:', user);
       // Optionally, redirect the user here
     } catch (error) {
@@ -200,6 +212,7 @@ const AuthForm = () => {
                 errors.password ? 'border-red-600' : 'border-gray-300'
               } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
+            
             {errors.password && (
               <p className="text-red-600 text-sm mt-1">{errors.password}</p>
             )}
@@ -298,7 +311,7 @@ const AuthForm = () => {
             </p>
           )}
         </div>
-      </div>
+      </div> 
     </div>
   );
 };
