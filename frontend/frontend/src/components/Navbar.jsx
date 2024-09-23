@@ -2,6 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const LinkClass = ({isActive}) =>{
+    isActive
+    ? 'bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
+    : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2';
+  }
+
   return (
     <>
     <nav
@@ -12,8 +18,8 @@ const Navbar = () => {
           <Link to="/">Edusphere</Link>
         </div>
         <div>
-          <Link className="mr-4" to="/">Home</Link>
-          <Link className="mr-4" to="/pdfs">PDFs</Link>
+          <Link className="mr-4 {LinkClass}" to="/">Home</Link>
+          <Link className="mr-4{LinkClass}" to="/pdfs">PDFs</Link>
           <Link className="mr-4" to="/rental">Rental</Link>
           <Link className="mr-4" to="/marketplace">Marketplace</Link>
           <Link className="mr-4" to="/news">News</Link>

@@ -1,9 +1,10 @@
 import React from 'react'
-import AuthComponent from '../components/firebase/AuthComponent'
+import AuthForm from '../components/Authcomponent/AuthForm'
+
 const Auth = () => {
   return (
     <div>
-        <AuthComponent />
+        <AuthForm />
     </div>
   )
 }
