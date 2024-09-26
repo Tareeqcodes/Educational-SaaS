@@ -13,7 +13,7 @@ import PdfPage from './pages/PdfPage';
 import Rental from  './pages/Rental'
 import MarketPlacePage from './pages/MarketPlacePage';
 import NewsPage from './pages/News';
-import SellCoursesPage from './pages/SellCoursesPage';
+import ProfilePage from './pages/ProfilePage';
 import Auth from './pages/Auth';
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
        <Route path='/Rental' element={< Rental />} />
        <Route path='/marketplace' element= {<MarketPlacePage />} />
        <Route path='/news' element= {<NewsPage />} />
-       <Route path='/sell-courses' element= {<SellCoursesPage />} />
+       <Route path='/profilepage' element= {<ProfilePage />} />
        <Route path='/Auth' element= {< Auth />} />
     </Route>
   )

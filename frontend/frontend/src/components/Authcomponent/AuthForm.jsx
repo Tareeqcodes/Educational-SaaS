@@ -14,6 +14,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false); 
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

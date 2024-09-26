@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const Navbar = () => {
   const LinkClass = ({isActive}) =>{
@@ -17,14 +17,28 @@ const Navbar = () => {
         <div className="text-2xl  font-bold">
           <Link to="/">Edusphere</Link>
         </div>
-        <div>
-          <Link className="mr-4 ${LinkClass}" to="/">Home</Link>
-          <Link className="mr-4 ${LinkClass}" to="/pdfs">PDFs</Link>
-          <Link className="mr-4" to="/rental">Rental</Link>
-          <Link className="mr-4" to="/marketplace">Marketplace</Link>
-          <Link className="mr-4" to="/news">News</Link>
-          <Link className="mr-4" to="/sell-courses">Sell Courses</Link>
-          <Link className="mr-4" to="/Auth">Login</Link> 
+        <div className='flex  '>
+          <Link className="mr-4" to="/">
+          Home
+          </Link>
+          <Link className="mr-4" to="/pdfs">
+          PDFs
+          </Link>
+          <Link className="mr-4" to="/rental">
+          Rental
+          </Link>
+          <Link className="mr-4" to="/marketplace">
+          Marketplace
+          </Link>
+          <Link className="mr-4" to="/news">
+          News
+          </Link>
+          <Link className="mr-4" to="/profilepage">
+          Profile
+          </Link>
+          <Link className="mr-4" to="/Auth">
+          Login
+          </Link> 
         </div>
       </div>
     </nav>
