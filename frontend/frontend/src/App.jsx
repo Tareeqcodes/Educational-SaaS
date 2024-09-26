@@ -15,6 +15,7 @@ import MarketPlacePage from './pages/MarketPlacePage';
 import NewsPage from './pages/News';
 import ProfilePage from './pages/ProfilePage';
 import Auth from './pages/Auth';
+import NotFoundPage from './components/NotFoundPage';
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
        <Route path='/news' element= {<NewsPage />} />
        <Route path='/profilepage' element= {<ProfilePage />} />
        <Route path='/Auth' element= {< Auth />} />
+       <Route path='*' element={<NotFoundPage />} />
     </Route>
   )
 )
