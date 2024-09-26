@@ -3,6 +3,8 @@ import {
   getAuth, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
+  sendEmailVerification,
+  sendPasswordResetEmail,
   GoogleAuthProvider, 
   signInWithPopup 
 } from 'firebase/auth';
@@ -11,14 +13,16 @@ import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AuthForm = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // Toggle between sign-up and sign-in
+  const [isSignUp, setIsSignUp] = useState(false); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [role, setRole] = useState('student'); // Role state
-  const [errors, setErrors] = useState({}); // Object to hold various error messages
-  const [loading, setLoading] = useState(false); // Loading state
-
+  const [errors, setErrors] = useState({}); 
+  const [loading, setLoading] = useState(false); 
+  
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
   const db = getFirestore(app);
@@ -75,6 +79,20 @@ const AuthForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const passwordReset = async() =>{
+    if(!email){
+      alert('please enter your email address');
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert('Password reset email sent! Please check your inbox.');
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+      alert('Failed to send password reset email. Please try again.');
+    }
+  }
+
   const handleEmailSignUp = async (e) => {
     e.preventDefault();
     setErrors({});
@@ -86,6 +104,8 @@ const AuthForm = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      await sendEmailVerification(user); 
+    alert('Verification email sent! Please check your inbox.');
       const userRef = doc(db, 'users', user.uid);
       await setDoc(userRef, { role }, { merge: true });
       console.log('Signed up user:', user);
@@ -111,6 +131,10 @@ const AuthForm = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      if(!user.emailVerified){
+        await auth.signOut();
+        alert('Your email is not verified. please check your inbox for verification link.');
+      }
       resetForm();
       console.log('Signed in user:', user);
       // Optionally, redirect the user here
@@ -173,7 +197,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center text-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-4">
           {isSignUp ? 'Sign Up' : 'Sign In'}
@@ -185,7 +209,6 @@ const AuthForm = () => {
         )}
 
         <form onSubmit={isSignUp ? handleEmailSignUp : handleEmailSignIn}>
-          {/* Email Input */}
           <div className="mb-4">
             <input
               type="email"
@@ -201,10 +224,9 @@ const AuthForm = () => {
             )}
           </div>
 
-          {/* Password Input */}
-          <div className="mb-4">
+          <div className="relative mb-4">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -212,6 +234,12 @@ const AuthForm = () => {
                 errors.password ? 'border-red-600' : 'border-gray-300'
               } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
+            <span 
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-4 cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
             
             {errors.password && (
               <p className="text-red-600 text-sm mt-1">{errors.password}</p>
@@ -220,9 +248,9 @@ const AuthForm = () => {
 
           {/* Confirm Password Input (Sign Up only) */}
           {isSignUp && (
-            <div className="mb-4">
+            <div className="relative mb-4"> 
               <input
-                type="password"
+                type={confirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password"
@@ -230,6 +258,12 @@ const AuthForm = () => {
                   errors.confirmPassword ? 'border-red-600' : 'border-gray-300'
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
               />
+              <span 
+               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-4 cursor-pointer"
+              >
+                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
               {errors.confirmPassword && (
                 <p className="text-red-600 text-sm mt-1">{errors.confirmPassword}</p>
               )}
@@ -245,6 +279,7 @@ const AuthForm = () => {
             >
               <option value="student">Student</option>
               <option value="lecturer">Lecturer</option>
+              <option value="vendor">Vendor</option>
             </select>
           </div>
 
@@ -280,6 +315,12 @@ const AuthForm = () => {
             ? 'Sign Up with Google'
             : 'Sign In with Google'}
         </button>
+        <div>
+          <button className='text-blue-600 font-ubuntu font-bold pt-2 '
+           onClick={(passwordReset)}
+          >
+            Forget password</button>
+        </div>
 
         {/* Toggle Sign Up / Sign In */}
         <div className="text-center mt-4">
@@ -291,6 +332,7 @@ const AuthForm = () => {
                 onClick={() => {
                   setIsSignUp(false);
                   setErrors({});
+                  resetForm(); 
                 }}
               >
                 Sign In
@@ -304,6 +346,7 @@ const AuthForm = () => {
                 onClick={() => {
                   setIsSignUp(true);
                   setErrors({});
+                  resetForm();
                 }}
               >
                 Sign Up

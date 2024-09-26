@@ -18,8 +18,8 @@ const Navbar = () => {
           <Link to="/">Edusphere</Link>
         </div>
         <div>
-          <Link className="mr-4 {LinkClass}" to="/">Home</Link>
-          <Link className="mr-4{LinkClass}" to="/pdfs">PDFs</Link>
+          <Link className="mr-4 ${LinkClass}" to="/">Home</Link>
+          <Link className="mr-4 ${LinkClass}" to="/pdfs">PDFs</Link>
           <Link className="mr-4" to="/rental">Rental</Link>
           <Link className="mr-4" to="/marketplace">Marketplace</Link>
           <Link className="mr-4" to="/news">News</Link>
