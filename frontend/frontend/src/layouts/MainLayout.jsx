@@ -1,16 +1,20 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Dashboard from '../components/Homepage/Dashboard/Dashboard'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
         <Navbar />
-        <div style={{ minHeight: 'calc(100vh - 100px)' }}> {/* Adjust the height as needed */}
+        <div className='flex flex-grow'>
+        <Dashboard />
+        <div className='flex-grow p-4' >
         <Outlet />
       </div>
+        </div>
        <Footer />
     </div>
   )

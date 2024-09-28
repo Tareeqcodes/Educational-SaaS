@@ -6,6 +6,7 @@ import About from '../components/Homepage/About';
 const MainPage = () => {
   return (
     <div>
+      
         <Header />
         <Hero />
         <About />
