@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch';
+import { InstantSearch, SearchBox } from 'react-instantsearch';
 import MainLayout from './layouts/MainLayout';
 import MainPage from './pages/MainPage';
 import PdfPage from './pages/PdfPage';
@@ -39,7 +39,7 @@ function App() {
     <>
     <RouterProvider router={router} />
     <InstantSearch searchClient={searchClient} indexName="instant_search">
-      {/* Widgets */}
+      <SearchBox />
     </InstantSearch>
     </>
   

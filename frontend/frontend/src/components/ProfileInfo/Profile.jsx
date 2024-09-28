@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const auth = getAuth();
@@ -33,6 +34,7 @@ const Profile = () => {
   };
 
   return (
+    <>
     <div className="profile-page py-32 items-center text-center justify-center">
       {user ? (
         <div className="user-info">
@@ -47,6 +49,7 @@ const Profile = () => {
         <p>Loading user info...</p>
       )}
     </div>
+    </>
   );
 };
 
