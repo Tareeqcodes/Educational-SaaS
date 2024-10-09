@@ -39,7 +39,7 @@ function App() {
     <>
     <RouterProvider router={router} />
     <InstantSearch searchClient={searchClient} indexName="instant_search">
-      <SearchBox />
+     
     </InstantSearch>
     </>
   

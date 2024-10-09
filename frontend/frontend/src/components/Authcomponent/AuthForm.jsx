@@ -37,8 +37,12 @@ const AuthForm = () => {
   };
 
   const validateEmail = () => {
-    if (role === 'lecturer' && !email.endsWith('@lecturer.university.edu')) {
-      return 'Please use a valid lecturer university email (@lecturer.university.edu).';
+    const emailPattern = /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/;
+    if (role === 'lecturer') {
+      // Check if the email matches the pattern
+      if (!emailPattern.test(email)) {
+        return 'Please use a valid lecturer email';
+      }
     }
     return '';
   };
@@ -215,7 +219,7 @@ const AuthForm = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your university email"
+              placeholder="Email address"
               className={`p-2 w-full border ${
                 errors.email ? 'border-red-600' : 'border-gray-300'
               } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
