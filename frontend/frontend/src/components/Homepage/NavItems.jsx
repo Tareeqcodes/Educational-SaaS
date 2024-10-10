@@ -8,20 +8,17 @@ const NavItems = () => {
            Home
           </Link>
          
-          <Link className="text-white mx-2 font-bold" to="/pdfs">
+          <Link className="text-white  px-3 font-bold" to="/pdfs">
           PDFs
           </Link>
-          <Link className="text-white mx-2 font-bold" to="/rental">
+          <Link className="text-white  px-3 font-bold" to="/rental">
           Rental
           </Link>
-          <Link className="text-white mx-2 font-bold" to="/ma rounderketplace">
+          <Link className="text-white  px-3 font-bold" to="/marketplace">
           Marketplace
           </Link>
-          <Link className="text-white mx-2 font-bold" to="/news">
+          <Link className="text-white  px-3 font-bold" to="/news">
           News
-          </Link>
-          <Link className="text-white mx-2 font-bold" to="/profilepage">
-          Profile
           </Link> 
         </div>
   )
