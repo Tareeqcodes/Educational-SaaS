@@ -35,9 +35,9 @@ const AuthForm = () => {
     setRole('student');
     setErrors('');
   };
-
+// /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/
   const validateEmail = () => {
-    const emailPattern = /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/;
+    const emailPattern = /^[a-zA-Z]+[0-9]*@[\gmail]+\.com/;
     if (role === 'lecturer') {
       if (!emailPattern.test(email)) {
         return 'Please use a valid lecturer email';
