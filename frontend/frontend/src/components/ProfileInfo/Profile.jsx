@@ -49,8 +49,6 @@ const Profile = () => {
         <div className="user-info">
           <h2>Profile</h2>
           <p><strong>Email:</strong> {user.email}</p>
-
-          {/* Check the user's role and conditionally render the LecturersProfile */}
           {role === 'lecturer' ? (
             <LecturersProfile /> // Show the lecturer's profile with upload options
           ) : (

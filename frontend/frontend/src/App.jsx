@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { InstantSearch, SearchBox } from 'react-instantsearch';
+import { UserProvider } from './components/context/UserContext';
 import MainLayout from './layouts/MainLayout';
 import MainPage from './pages/MainPage';
 import PdfPage from './pages/PdfPage';
@@ -16,6 +17,7 @@ import NewsPage from './pages/News';
 import ProfilePage from './pages/ProfilePage';
 import Auth from './pages/Auth';
 import NotFoundPage from './components/NotFoundPage';
+
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
 
@@ -36,12 +38,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <>
+    <UserProvider>   
     <RouterProvider router={router} />
-    <InstantSearch searchClient={searchClient} indexName="instant_search">
-     
+    <InstantSearch searchClient={searchClient} indexName="instant_search">  
     </InstantSearch>
-    </>
+    </UserProvider>
   
   )
 } 

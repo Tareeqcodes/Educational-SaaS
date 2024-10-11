@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
@@ -11,10 +12,10 @@ import {
 import { app } from '../firebase/FireBaseConfig';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useUser } from '../context/UserContext';
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false); 
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,10 +24,12 @@ const AuthForm = () => {
   const [role, setRole] = useState('student'); // Role state
   const [errors, setErrors] = useState({}); 
   const [loading, setLoading] = useState(false); 
+  const { setUser } = useUser();
   
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
   const db = getFirestore(app);
+  const navigate = useNavigate();
 
   const resetForm = () =>{
     setEmail('');
@@ -136,6 +139,8 @@ const AuthForm = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      setUser(user);
+      navigate('/');
       if(!user.emailVerified){
         await auth.signOut();
         alert('Your email is not verified. please check your inbox for verification link.');
@@ -159,6 +164,8 @@ const AuthForm = () => {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       const userRef = doc(db, 'users', user.uid);
+      setUser(user);
+      navigate('/');
       await setDoc(userRef, { role }, { merge: true });
       resetForm();
       console.log('Signed in with Google:', user);
