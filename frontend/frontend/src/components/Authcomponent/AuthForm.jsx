@@ -112,13 +112,16 @@ const AuthForm = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       await sendEmailVerification(user); 
-    alert('Verification email sent! Please check your inbox.');
+      if(!user.emailVerified){
+        await auth.signOut();
+        toast.success('Verification email sent! Please check your inbox.');
+        return;
+      }
       const userRef = doc(db, 'users', user.uid);
       await setDoc(userRef, { role }, { merge: true });
       console.log('Signed up user:', user);
       console.log('User role:', role);
       resetForm();
-      // Optionally, redirect the user or reset the form here
     } catch (error) {
       console.error('Error during sign-up:', error);
       handleAuthError(error);
@@ -149,7 +152,6 @@ const AuthForm = () => {
       navigate('/');
       toast.success('login successfully');
       console.log('Signed in user:', user);
-      // Optionally, redirect the user here
     } catch (error) {
       console.error('Error during sign-in:', error);
       handleAuthError(error);
