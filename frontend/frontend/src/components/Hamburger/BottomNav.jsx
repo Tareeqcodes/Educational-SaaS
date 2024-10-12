@@ -1,5 +1,4 @@
 import { AiOutlineHome,  AiOutlineFilePdf} from 'react-icons/ai';
-import { IoNewspaperOutline} from 'react-icons/io5';
 import { FaStore, FaBuilding} from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
@@ -28,12 +27,6 @@ const BottomNav = () => {
         <Link to="/marketplace">
        <FaStore className="text-green-600 text-3xl" />
        <span className='font-semibold text-sm'>Bukstore</span>
-        </Link>
-      </div>
-      <div className="flex flex-col">
-        <Link to="/news">
-      <IoNewspaperOutline className='text-white text-3xl' />
-       <span className='font-semibold text-sm'>News</span> 
         </Link>
       </div>
     </div>

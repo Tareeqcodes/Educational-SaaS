@@ -1,10 +1,10 @@
 import React from 'react'
-import PDFLists from '../components/Pdfs/PDFLists';
+import PDFCard from '../components/Pdfs/PDFCard';
 
 const PdfPage = () => {
   return (
     <>
-    <PDFLists />
+    <PDFCard />
     </>
   )
 }

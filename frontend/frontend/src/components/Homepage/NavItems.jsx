@@ -7,7 +7,6 @@ const NavItems = () => {
           <Link className="text-white font-bold" to="/">
            Home
           </Link>
-         
           <Link className="text-white  px-3 font-bold" to="/pdfs">
           PDFs
           </Link>
@@ -17,9 +16,6 @@ const NavItems = () => {
           <Link className="text-white  px-3 font-bold" to="/marketplace">
           Marketplace
           </Link>
-          <Link className="text-white  px-3 font-bold" to="/news">
-          News
-          </Link> 
         </div>
   )
 }

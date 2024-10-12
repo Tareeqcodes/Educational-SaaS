@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify';
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
@@ -53,7 +54,6 @@ const AuthForm = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Email validation
     if (!email) {
       newErrors.email = 'Email is required.';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -65,7 +65,6 @@ const AuthForm = () => {
       }
     }
 
-    // Password validation
     if (!password) {
       newErrors.password = 'Password is required.';
     } else if (password.length < 6) {
@@ -94,7 +93,7 @@ const AuthForm = () => {
     }
     try {
       await sendPasswordResetEmail(auth, email);
-      alert('Password reset email sent! Please check your inbox.');
+      toast.success('Password reset email sent! Please check your inbox.');
     } catch (error) {
       console.error('Error sending password reset email:', error);
       alert('Failed to send password reset email. Please try again.');
@@ -139,13 +138,16 @@ const AuthForm = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      setUser(user);
-      navigate('/');
+
       if(!user.emailVerified){
         await auth.signOut();
         alert('Your email is not verified. please check your inbox for verification link.');
+        return;
       }
+      setUser(user);
       resetForm();
+      navigate('/');
+      toast.success('login successfully');
       console.log('Signed in user:', user);
       // Optionally, redirect the user here
     } catch (error) {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import LecturersProfile from './LecturersProfile'; // Import your LecturersProfile component
+import LecturersProfile from './LecturersProfile';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -36,7 +37,8 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      alert("You have been logged out successfully.");
+      toast.success("Logged out successfully!"); // Show success toast message
+      
       navigate('/');
     } catch (error) {
       console.error("Error logging out:", error);
@@ -50,7 +52,7 @@ const Profile = () => {
           <h2>Profile</h2>
           <p><strong>Email:</strong> {user.email}</p>
           {role === 'lecturer' ? (
-            <LecturersProfile /> // Show the lecturer's profile with upload options
+          <LecturersProfile />
           ) : (
             <p>Welcome, {user.email}! You are logged in as a {role}.</p>
           )}
