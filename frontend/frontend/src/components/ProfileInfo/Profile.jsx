@@ -17,13 +17,13 @@ const Profile = () => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-
+        
         // Fetch the role from Firestore
         const userDocRef = doc(db, 'users', currentUser.uid);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setRole(userData.role); // Set the role from Firestore
+          setRole(userData.role); 
         }
       } else {
         setUser(null);
