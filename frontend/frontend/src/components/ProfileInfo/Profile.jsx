@@ -37,8 +37,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      toast.success("Logged out successfully!"); // Show success toast message
-      
+      toast.success("Logged out successfully!");
       navigate('/');
     } catch (error) {
       console.error("Error logging out:", error);

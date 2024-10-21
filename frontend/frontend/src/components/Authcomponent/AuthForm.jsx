@@ -117,11 +117,13 @@ const AuthForm = () => {
         toast.success('Verification email sent! Please check your inbox.');
         return;
       }
+      
       const userRef = doc(db, 'users', user.uid);
       await setDoc(userRef, { role }, { merge: true });
       console.log('Signed up user:', user);
       console.log('User role:', role);
       resetForm();
+
     } catch (error) {
       console.error('Error during sign-up:', error);
       handleAuthError(error);
@@ -173,7 +175,7 @@ const AuthForm = () => {
       await setDoc(userRef, { role }, { merge: true });
       resetForm();
       console.log('Signed in with Google:', user);
-      // Optionally, redirect the user here
+
     } catch (error) {
       console.error('Error during Google sign-in:', error);
       handleAuthError(error);
@@ -204,7 +206,7 @@ const AuthForm = () => {
         case 'auth/popup-closed-by-user':
           message = 'The popup was closed before completing the sign in.';
           break;
-        // Add more cases as needed
+        
         default:
           message = error.message;
       }
