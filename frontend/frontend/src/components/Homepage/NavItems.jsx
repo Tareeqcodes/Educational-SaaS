@@ -4,16 +4,16 @@ const NavItems = () => {
   return (
     
         <div className='flex flex-row'>
-          <Link className="text-white font-bold" to="/">
+          <Link className="px-3 font-bold" to="/">
            Home
           </Link>
-          <Link className="text-white  px-3 font-bold" to="/pdfs">
+          <Link className="px-3 font-bold" to="/pdfs">
           PDFs
           </Link>
-          <Link className="text-white  px-3 font-bold" to="/rental">
+          <Link className="px-3 font-bold" to="/rental">
           Rental
           </Link>
-          <Link className="text-white  px-3 font-bold" to="/marketplace">
+          <Link className="px-3 font-bold" to="/marketplace">
           Marketplace
           </Link>
         </div>
