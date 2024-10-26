@@ -11,7 +11,7 @@ const About = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center justify-center">  
         <div className="bg-gray-300 rounded-lg py-10 px-12 max-w-md mx-auto flex flex-col items-center justify-center">  
           <h3 className="text-xl font-bold">For Instructors</h3>
-          <button className='border border-white text-white font-bold rounded-xl w-40 py-1 px-2 my-5'>Start</button>
+          <button className='border border-green-800 text-black font-bold rounded-xl w-40 py-1 px-2 my-5'>Start</button>
         </div>
 
         <div className="bg-gray-300 rounded-lg py-10 px-12 max-w-md mx-auto flex flex-col items-center justify-center"> 

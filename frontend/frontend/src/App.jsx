@@ -13,7 +13,7 @@ import MainPage from './pages/MainPage';
 // import Rental from  './pages/Rental'
 // import MarketPlacePage from './pages/MarketPlacePage';
 // import ProfilePage from './pages/ProfilePage';
-// import Auth from './pages/Auth';
+ import Auth from './pages/Auth';
 import NotFoundPage from './components/NotFoundPage';
 
 
@@ -26,8 +26,8 @@ const router = createBrowserRouter(
        {/* <Route path='/pdfs' element= {<PdfPage />} />
        <Route path='/Rental' element={< Rental />} />
        <Route path='/marketplace' element= {<MarketPlacePage />} />
-       <Route path='/profilepage' element= {<ProfilePage />} />
-       <Route path='/Auth' element= {< Auth />} /> */}
+       <Route path='/profilepage' element= {<ProfilePage />} />*/}
+       <Route path='/Auth' element= {< Auth />} /> 
        <Route path='*' element={<NotFoundPage />} />
     </Route>
   )

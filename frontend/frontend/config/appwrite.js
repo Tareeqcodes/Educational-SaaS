@@ -8,3 +8,4 @@ Client
 export const account = new Account(Client);
 export const databases = new Databases(Client);
 export const storage = new Storage(Client);
+export default Client;
