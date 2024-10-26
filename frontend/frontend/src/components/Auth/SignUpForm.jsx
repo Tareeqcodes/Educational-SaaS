@@ -76,7 +76,7 @@ const SignUpForm = ({ onSwitch }) => {
 
           <div className='flex flex-col gap-5'>
             <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'>
-              Register
+              Sign Up
             </button>
             <p>
               Already have an account?{' '}
