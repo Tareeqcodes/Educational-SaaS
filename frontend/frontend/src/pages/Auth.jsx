@@ -1,10 +1,17 @@
 import React from 'react'
-
+import { useState } from 'react'
+import SignInForm from '../components/Auth/SignInForm'
+import SignUpForm from '../components/Auth/SignUpForm'
 
 const Auth = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
   return (
     <div>
-        <h1  className='text-white mt-16'>Hellow World</h1>
+         {isSignIn ? (
+        <SignInForm onSwitch={() => setIsSignIn(false)} />
+      ) : (
+        <SignUpForm onSwitch={() => setIsSignIn(true)} />
+      )}
     </div>
   )
 }
