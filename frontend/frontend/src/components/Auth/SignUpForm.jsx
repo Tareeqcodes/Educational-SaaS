@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useAuth } from '../../../context/Authcontext';
 
 const SignUpForm = ({ onSwitch }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(password!==confirmPassword){
+      alert("Passwords do not match");
+      return;
+    }
+    try {
+      await SignUp(email, password);
+      console.log('signup successful');
+    } catch (error) {
+      console.log(error);
+      
+    }
+   
+  }
 
   return (
     <div className='flex items-center justify-center'>
       <div className='bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20'>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-3'>
             Sign Up
           </h2>
@@ -23,6 +43,8 @@ const SignUpForm = ({ onSwitch }) => {
               name='email'
               className='border rounded w-full py-2 px-3'
               autoComplete='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -36,6 +58,8 @@ const SignUpForm = ({ onSwitch }) => {
               name='password'
               className='border rounded w-full py-2 px-3'
               autoComplete='current-password'
+              value={password}
+            onChange={(e) => setPassword(e.target.value)}
               required
             />
             <span
@@ -56,6 +80,8 @@ const SignUpForm = ({ onSwitch }) => {
               name='confirm-password'
               className='border rounded w-full py-2 px-3'
               autoComplete='new-password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
             <span

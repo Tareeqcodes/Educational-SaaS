@@ -15,6 +15,7 @@ import MainPage from './pages/MainPage';
 // import ProfilePage from './pages/ProfilePage';
  import Auth from './pages/Auth';
 import NotFoundPage from './components/NotFoundPage';
+import { AuthProvider } from '../context/Authcontext';
 
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
@@ -36,12 +37,11 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
-   
-    
+   <AuthProvider>
     <RouterProvider router={router} />
     <InstantSearch searchClient={searchClient} indexName="instant_search">  
     </InstantSearch>
-    
+    </AuthProvider>
     </>
   )
 } 

@@ -1,49 +1,74 @@
-// AuthContext.js
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import account from '../config/appwrite'
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { ID } from "node-appwrite";
+import { account } from '../config/appwrite';
 
 const AuthContext = createContext();
+export function useUser(){
 
-export const useAuth = () => useContext(AuthContext);
+  return useContext(AuthContext);
+}
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Check if the user is logged in on initial load
   useEffect(() => {
-    const getUser = async () => {
+    const checkAuth = async () => {
       try {
-        const currentUser = await account.get();
-        setUser(currentUser);
+        const response = await account.get();
+        setUser(response); // Sets user if authenticated
       } catch {
-        setUser(null);
+        setUser(null); // No user logged in
       } finally {
         setLoading(false);
       }
     };
-    getUser();
+
+    checkAuth();
   }, []);
 
-  const login = async (email, password) => {
-    await account.createEmailSession(email, password);
-    const currentUser = await account.get();
-    setUser(currentUser);
+  // Sign Up function
+  const signUp = async (email, password) => {
+    try {
+      const response = await account.create("unique()", email, password);
+      setUser(response);
+      return response;
+    } catch (error) {
+      console.error("Sign up error:", error);
+      throw error;
+    }
   };
 
-  const register = async (email, password, name) => {
-    await account.create('unique()', email, password, name);
-    const currentUser = await account.get();
-    setUser(currentUser);
+  // Sign In function
+  const signIn = async (email, password) => {
+    try {
+      await account.create(ID.unique(), email, password);
+      setUser(response);
+      return response;
+    } catch (error) {
+      console.error("Sign in error:", error);
+      throw error;
+    }
   };
 
-  const logout = async () => {
-    await account.deleteSession('current');
-    setUser(null);
+  // Sign Out function
+  const signOut = async () => {
+    try {
+      await account.deleteSession("current");
+      setUser(null);
+    } catch (error) {
+      console.error("Sign out error:", error);
+      throw error;
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+// Custom hook for using auth context
+export const useAuth = () => useContext(AuthContext);

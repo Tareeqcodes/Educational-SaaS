@@ -7,7 +7,7 @@ const TopNav = () => {
   return (
     <nav className="fixed top-0 w-full bg-gray-100 text-white p-2 flex justify-between items-center z-50 md:hidden">
       <Link to='/'>
-         <img src={logo} alt="logo" className='h-12 w-12'/>
+         <img src={logo} alt="logo" className='h-12 w- ml-1'/>
          </Link>
       <div className="flex space-x-4">
         

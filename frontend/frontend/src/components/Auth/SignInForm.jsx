@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { useAuth } from '../../../context/Authcontext';
+import { account } from '../../../config/appwrite';
 
 
 const SignInForm = ({onSwitch}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { signIn } = useAuth();
+
+  const handleSignIn = async (e)=>{
+   e.preventhDefault();
+   try {
+    await signIn(email, password);
+    console.log('signIn succefully')
+   } catch (error) {
+    console.log('error');
+   }
+}
 
   return (
     <div className='flex items-center justify-center'>
     <div className='bg-white text-black shadow-lg rounded-lg p-6 w-full max-w-sm mt-20'>
-      <form>
+      <form onSubmit={handleSignIn}>
         <h2 className='text-2xl font-bold text-center text-gray-800 mb-6'>
           Login
         </h2>
@@ -28,6 +42,7 @@ const SignInForm = ({onSwitch}) => {
             className='border rounded w-full py-2 px-3'
             autoComplete='email'
             required
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -45,6 +60,7 @@ const SignInForm = ({onSwitch}) => {
             className='border rounded w-full py-2 px-3'
             autoComplete='password'
             required
+            onChange={(e) => setPassword(e.target.value)}
           />
           <span
               onClick={() => setShowPassword(!showPassword)}

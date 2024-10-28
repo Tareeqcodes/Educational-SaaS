@@ -1,11 +1,11 @@
 import { Client, Databases, Account, Storage } from 'node-appwrite';
 
 
-Client
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('<PROJECT_ID>'); 
+const client = new Client();
+client
+    .setEndpoint(import.meta.env.APPWRITE_ENDPOINT_KEY)
+    .setProject(import.meta.env.APPWRITE_PROJECT_ID); 
 
-export const account = new Account(Client);
-export const databases = new Databases(Client);
-export const storage = new Storage(Client);
-export default Client;
+export const account = new Account(client);
+export const databases = new Databases(client);
+export const storage = new Storage(client);
