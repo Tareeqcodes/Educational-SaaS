@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (email, password) => {
     try {
       await account.create(ID.unique(), email, password);
+      await sendVerificationEmail();
       return await signIn(email, password);
     } catch (error) {
       console.error("Sign-up error:", error);
@@ -43,6 +44,15 @@ export const AuthProvider = ({ children }) => {
       return response;
     } catch (error) {
       console.error("Sign-in error:", error);
+    }
+  };
+
+  const sendVerificationEmail = async () => {
+    try {
+      const response = await account.createVerification('https://your-redirect-url.com/verify');
+      console.log("Verification email sent:", response);
+    } catch (error) {
+      console.error("Verification error:", error);
     }
   };
 
