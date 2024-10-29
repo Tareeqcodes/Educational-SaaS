@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import { useAuth } from '../../../context/Authcontext';
+
 
 const SignUpForm = ({ onSwitch }) => {
   const [email, setEmail] = useState("");
@@ -8,6 +10,8 @@ const SignUpForm = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { signUp } = useAuth();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +20,8 @@ const SignUpForm = ({ onSwitch }) => {
       return;
     }
     try {
-      await SignUp(email, password);
+      await signUp(email, password);
+      toast.success('signup successful')
       console.log('signup successful');
     } catch (error) {
       console.log(error);
@@ -27,12 +32,11 @@ const SignUpForm = ({ onSwitch }) => {
 
   return (
     <div className='flex items-center justify-center'>
-      <div className='bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20'>
+      <div className='bg-white shadow-lg rounded-lg p-4 w-full max-w-sm mt-20'>
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-3'>
             Sign Up
           </h2>
-
           <div className='mb-4'>
             <label htmlFor='email' className='block text-gray-700 font-bold mb-2'>
               Email
@@ -41,6 +45,7 @@ const SignUpForm = ({ onSwitch }) => {
               type='email'
               id='email'
               name='email'
+              placeholder='Email'
               className='border rounded w-full py-2 px-3'
               autoComplete='email'
               value={email}
@@ -56,6 +61,7 @@ const SignUpForm = ({ onSwitch }) => {
             <input
               type={showPassword ? 'text' : 'password'}
               name='password'
+              placeholder='Password'
               className='border rounded w-full py-2 px-3'
               autoComplete='current-password'
               value={password}
@@ -64,7 +70,7 @@ const SignUpForm = ({ onSwitch }) => {
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-12 cursor-pointer"
+              className="absolute right-3 top-11 cursor-pointer"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
@@ -78,6 +84,7 @@ const SignUpForm = ({ onSwitch }) => {
               type={showConfirmPassword ? 'text' : 'password'}
               id='confirm-password'
               name='confirm-password'
+              placeholder='Confirm Password'
               className='border rounded w-full py-2 px-3'
               autoComplete='new-password'
               value={confirmPassword}
@@ -86,7 +93,7 @@ const SignUpForm = ({ onSwitch }) => {
             />
             <span
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-12 cursor-pointer"
+              className="absolute right-3 top-11 cursor-pointer"
             >
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </span>

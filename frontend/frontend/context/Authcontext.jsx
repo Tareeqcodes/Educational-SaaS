@@ -3,16 +3,15 @@ import { ID } from "node-appwrite";
 import { account } from '../config/appwrite';
 
 const AuthContext = createContext();
-export function useUser(){
-
+export function useUser() {
   return useContext(AuthContext);
 }
+
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if the user is logged in on initial load
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -28,38 +27,31 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  // Sign Up function
   const signUp = async (email, password) => {
     try {
-      const response = await account.create("unique()", email, password);
-      setUser(response);
-      return response;
+      await account.create(ID.unique(), email, password);
+      return await signIn(email, password);
     } catch (error) {
-      console.error("Sign up error:", error);
-      throw error;
+      console.error("Sign-up error:", error);
     }
   };
 
-  // Sign In function
   const signIn = async (email, password) => {
     try {
-      await account.create(ID.unique(), email, password);
+      const response = await account.createEmailPasswordSession(email, password);
       setUser(response);
       return response;
     } catch (error) {
-      console.error("Sign in error:", error);
-      throw error;
+      console.error("Sign-in error:", error);
     }
   };
 
-  // Sign Out function
   const signOut = async () => {
     try {
       await account.deleteSession("current");
       setUser(null);
     } catch (error) {
-      console.error("Sign out error:", error);
-      throw error;
+      console.error("Sign-out error:", error);
     }
   };
 
@@ -70,5 +62,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook for using auth context
 export const useAuth = () => useContext(AuthContext);

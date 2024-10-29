@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../../context/Authcontext';
-import { account } from '../../../config/appwrite';
+import { toast } from 'react-toastify';
+
 
 
 const SignInForm = ({onSwitch}) => {
@@ -11,9 +12,10 @@ const SignInForm = ({onSwitch}) => {
   const { signIn } = useAuth();
 
   const handleSignIn = async (e)=>{
-   e.preventhDefault();
+   e.preventDefault();
    try {
     await signIn(email, password);
+    toast.success('Logged in successfully');
     console.log('signIn succefully')
    } catch (error) {
     console.log('error');
