@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../context/Authcontext';
+import { databases } from '../../../config/appwrite';
 
 const ErrorMessages = ({ errors }) => ( 
   <ul className="text-red-500 text-sm">
@@ -23,7 +24,8 @@ const SignUpForm = ({ onSwitch }) => {
 
   const validateForm = () => {
     const validationErrors = [];
-    const emailPattern = /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/;
+    const emailPattern = /^[a-zA-Z]+[0-9]*@[\gmail]+\.com/;
+    // /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/
 
     if (role === 'lecturer' && !emailPattern.test(email)) {
       validationErrors.push('Please use a valid lecturer email');
@@ -31,7 +33,7 @@ const SignUpForm = ({ onSwitch }) => {
 
     if (password !== confirmPassword) {
       validationErrors.push('Passwords do not match');
-    }
+    } 
 
     setErrors(validationErrors);
     return validationErrors.length === 0;
@@ -40,6 +42,19 @@ const SignUpForm = ({ onSwitch }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+    if(role === 'lecture'){
+      const lecturerId = `lecturer_${user.$id}`;
+
+      await account.updatePrefs(user.$id, { role: "lecturer", lecturerId });
+
+      await databases.createDocument(
+        import.meta.env.VITE_DATABASE_ID,
+        import.meta.env.VITE_LECTURER_COLLECTION_ID,
+        lecturerId,
+        { role: "lecturer"},
+        [`lecturer_${user.$id}`],
+      );
+    }
 
     try {
       await signUp(email, password);

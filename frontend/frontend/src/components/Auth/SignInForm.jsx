@@ -23,7 +23,7 @@ const SignInForm = ({onSwitch}) => {
 }
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center text-justify'>
     <div className='bg-white text-black shadow-lg rounded-lg p-6 w-full min-w-96 mt-20'>
       <form onSubmit={handleSignIn}>
         <h2 className='text-2xl font-bold text-center text-gray-800 mb-6'>
@@ -79,7 +79,7 @@ const SignInForm = ({onSwitch}) => {
           >
             Login
           </button>
-
+          <h3 className='p-2 text-center'>forget password</h3>
           <p>
             Don't have an account?{''}
             <span onClick={onSwitch} className="text-blue-500 cursor-pointer p-3">
