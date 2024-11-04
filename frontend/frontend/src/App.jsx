@@ -12,10 +12,10 @@ import MainPage from './pages/MainPage';
 // import PdfPage from './pages/PdfPage';
 // import Rental from  './pages/Rental'
 // import MarketPlacePage from './pages/MarketPlacePage';
-// import ProfilePage from './pages/ProfilePage';
+ import Profile from './pages/Profile';
  import Auth from './pages/Auth';
 import NotFoundPage from './components/NotFoundPage';
-import { AuthProvider } from '../context/Authcontext';
+import { AuthProvider } from '../app/context/Authcontext';
 
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
@@ -26,8 +26,8 @@ const router = createBrowserRouter(
        <Route index element={<MainPage />} />
        {/* <Route path='/pdfs' element= {<PdfPage />} />
        <Route path='/Rental' element={< Rental />} />
-       <Route path='/marketplace' element= {<MarketPlacePage />} />
-       <Route path='/profilepage' element= {<ProfilePage />} />*/}
+       <Route path='/marketplace' element= {<MarketPlacePage />} />*/}
+       <Route path='/profile' element= {<Profile />} />
        <Route path='/Auth' element= {< Auth />} /> 
        <Route path='*' element={<NotFoundPage />} />
     </Route>

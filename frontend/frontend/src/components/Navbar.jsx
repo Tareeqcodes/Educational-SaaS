@@ -2,8 +2,12 @@ import React from 'react'
 import { Link} from 'react-router-dom';
 import NavItems from './Homepage/NavItems';
 import logo from '../assets/images/logo.svg';
+import { useAuth } from '../../app/context/Authcontext';
+
 
 const Navbar = () => {
+  const { user} = useAuth();
+  console.log("User info:", user);
   return (
     <>
     <nav
@@ -13,11 +17,16 @@ const Navbar = () => {
          <img src={logo} alt="logo" className='h-12 w-12'/>
          </Link>
         <NavItems />
-          
-            <Link className="bg-green-500 text-white py-1 px-2 rounded" to="/Auth">
-            Login
+        {user ? (
+           <Link to="/profile" className="bg-blue-500 text-white py-1 px-2 rounded">
+            Profile
           </Link>
-         
+          ): (
+            <Link className="bg-green-500 text-white py-1 px-2 rounded" to="/Auth">
+             Login
+             </Link>
+          )}
+           
       </div>
     </nav>
     </>

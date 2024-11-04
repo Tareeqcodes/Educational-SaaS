@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useAuth } from '../../../context/Authcontext';
+import { useAuth } from '../../../app/context/Authcontext';
 import { toast } from 'react-toastify';
-
 
 
 const SignInForm = ({onSwitch}) => {

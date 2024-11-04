@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { useAuth } from '../../../context/Authcontext';
-import { databases } from '../../../config/appwrite';
+import { useAuth } from '../../../app/context/Authcontext';
+import { databases } from '../../../app/config/appwrite';
 
 const ErrorMessages = ({ errors }) => ( 
   <ul className="text-red-500 text-sm">
