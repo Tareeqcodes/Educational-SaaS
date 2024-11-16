@@ -1,11 +1,11 @@
 import React from 'react'
-import ProfileInfo from '../components/profile/profileInfo'
-
+import Dashboard from '../components/profile/Dashboard'
+ 
 const Profile = () => {
   return (
     <div>
        <div className="bg-white text-black">
-        <ProfileInfo />
+        <Dashboard />
 
        </div>
       

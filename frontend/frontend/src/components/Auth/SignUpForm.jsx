@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { useAuth } from '../../../app/context/Authcontext';
-import { databases } from '../../../app/config/appwrite';
+
 
 const ErrorMessages = ({ errors }) => ( 
   <ul className="text-red-500 text-sm">
@@ -18,7 +17,7 @@ const SignUpForm = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [role, setRole] = useState('student');
+  const [role, setRole] = useState("student");
   const [errors, setErrors] = useState([]);
   const { signUp } = useAuth();
 
@@ -42,39 +41,26 @@ const SignUpForm = ({ onSwitch }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    if(role === 'lecture'){
-      const lecturerId = `lecturer_${user.$id}`;
-
-      await account.updatePrefs(user.$id, { role: "lecturer", lecturerId });
-
-      await databases.createDocument(
-        import.meta.env.VITE_DATABASE_ID,
-        import.meta.env.VITE_LECTURER_COLLECTION_ID,
-        lecturerId,
-        { role: "lecturer"},
-        [`lecturer_${user.$id}`],
-      );
-    }
-
+  
     try {
       await signUp(email, password);
-      toast.success('Signup successful');
     } catch (error) {
       console.error(error);
       setErrors([error.message || 'Signup failed']);
     }
   };
+  
 
   return (
     <div className='flex items-center min-w-96 justify-center'>
       <div className='bg-white shadow-lg rounded-lg p-4 w-full mt-20'>
         <form onSubmit={handleSubmit}>
-          <h2 className='text-2xl font-bold text-center text-gray-800 mb-3'>Sign Up</h2>
+          <h2 className='text-2xl font-bold text-center text-black mb-1'>Sign Up</h2>
 
           {errors.length > 0 && <ErrorMessages errors={errors} />}
 
-          <div className='mb-4'>
-            <label htmlFor='email' className='block text-gray-700 font-bold mb-2'>Email</label>
+          <div className='mb-2'>
+            <label htmlFor='email' className='block text-sm text-black font-bold mb-2'>Email</label>
             <input
               type='email'
               name='email'
@@ -87,8 +73,8 @@ const SignUpForm = ({ onSwitch }) => {
             />
           </div>
 
-          <div className='relative mb-4'>
-            <label htmlFor='password' className='block text-gray-700 font-bold mb-2'>Password</label>
+          <div className='relative mb-2'>
+            <label htmlFor='password' className='block text-sm text-black font-bold mb-2'>Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
               name='password'
@@ -108,7 +94,7 @@ const SignUpForm = ({ onSwitch }) => {
           </div>
 
           <div className='relative mb-6'>
-            <label htmlFor='confirm-password' className='block text-gray-700 font-bold mb-2'>Confirm Password</label>
+            <label htmlFor='confirm-password' className='block text-sm text-black font-bold mb-2'>Confirm Password</label>
             <input
               type={showConfirmPassword ? 'text' : 'password'}
               name='confirm-password'
@@ -127,7 +113,7 @@ const SignUpForm = ({ onSwitch }) => {
             </span>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-2">
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -140,10 +126,10 @@ const SignUpForm = ({ onSwitch }) => {
           </div>
 
           <div className='flex flex-col gap-5'>
-            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'>Sign Up</button>
-            <p>
+            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
+            <p className='text-black'>
               Already have an account?{' '}
-              <span onClick={onSwitch} className="text-blue-500 cursor-pointer">Login</span>
+              <span onClick={onSwitch} className="text-green-600 cursor-pointer">Login</span>
             </p>
           </div>
         </form>

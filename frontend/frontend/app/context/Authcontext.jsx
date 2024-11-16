@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ID } from "node-appwrite";
-import { account } from '../config/appwrite';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { account, ID } from '../config/appwrite';
 
 const AuthContext = createContext();
 export function useUser() {
@@ -11,17 +12,12 @@ export function useUser() {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        const response = await account.get();
-        setUser(response); // Sets user if authenticated
-      } catch {
-        setUser(null); // No user logged in
-      } finally {
-        setLoading(false);
-      }
+      checkUsersStatus();
+      setLoading(false);
     };
 
     checkAuth();
@@ -31,21 +27,36 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.create(ID.unique(), email, password);
       await sendVerificationEmail();
-      return await signIn(email, password);
+      toast.success('Account created');
+     
+      return signIn()
     } catch (error) {
       console.error("Sign-up error:", error);
     }
   };
 
+
   const signIn = async (email, password) => {
     try {
-      const response = await account.createEmailPasswordSession(email, password);
-      setUser(response);
-      return response;
+      await account.createEmailPasswordSession(email, password);
+      await checkUsersStatus();
+      navigate("/")
     } catch (error) {
-      console.error("Sign-in error:", error);
+      console.log("sign-in error", error)
     }
+    
+    
   };
+
+  const checkUsersStatus = async () => {
+     try {
+      const userDetails = await account.get();
+      // console.log('fetch users details', userDetails);
+      setUser(userDetails);
+     } catch (error) {
+      
+     }
+  }
 
   const sendVerificationEmail = async () => {
     try {
@@ -60,6 +71,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.deleteSession("current");
       setUser(null);
+      navigate("/");
+      toast.success("Signed out successfully.");
     } catch (error) {
       console.error("Sign-out error:", error);
     }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link} from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 import NavItems from './Homepage/NavItems';
 import logo from '../assets/images/logo.svg';
 import { useAuth } from '../../app/context/Authcontext';
@@ -7,7 +8,8 @@ import { useAuth } from '../../app/context/Authcontext';
 
 const Navbar = () => {
   const { user} = useAuth();
-  console.log("User info:", user);
+  // console.log("User info:", user);
+
   return (
     <>
     <nav
@@ -19,7 +21,7 @@ const Navbar = () => {
         <NavItems />
         {user ? (
            <Link to="/profile" className="bg-blue-500 text-white py-1 px-2 rounded">
-            Profile
+            <FaUser />
           </Link>
           ): (
             <Link className="bg-green-500 text-white py-1 px-2 rounded" to="/Auth">

@@ -1,9 +1,8 @@
 import React from 'react';
 import {
   Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
+  Routes,
+  BrowserRouter,
 } from 'react-router-dom';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { InstantSearch, SearchBox } from 'react-instantsearch';
@@ -20,9 +19,13 @@ import { AuthProvider } from '../app/context/Authcontext';
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path='/' element= {<MainLayout />}>
+function App() {
+  return (
+   
+     <BrowserRouter>
+   <AuthProvider>
+     <Routes>
+     <Route path='/' element= {<MainLayout />}>
        <Route index element={<MainPage />} />
        {/* <Route path='/pdfs' element= {<PdfPage />} />
        <Route path='/Rental' element={< Rental />} />
@@ -31,18 +34,11 @@ const router = createBrowserRouter(
        <Route path='/Auth' element= {< Auth />} /> 
        <Route path='*' element={<NotFoundPage />} />
     </Route>
-  )
-)
-
-function App() {
-  return (
-    <>
-   <AuthProvider>
-    <RouterProvider router={router} />
+     </Routes>
     <InstantSearch searchClient={searchClient} indexName="instant_search">  
     </InstantSearch>
     </AuthProvider>
-    </>
+     </BrowserRouter>
   )
 } 
 

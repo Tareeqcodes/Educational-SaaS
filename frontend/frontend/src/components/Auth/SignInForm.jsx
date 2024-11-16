@@ -8,10 +8,29 @@ const SignInForm = ({onSwitch}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState("");
+  const [roleError, setRoleError] = useState("");
   const { signIn } = useAuth();
+
+  // const checkRole = async ()=>{
+  //   if (role === 'student'){
+
+  //   }
+  // }
+
+  
 
   const handleSignIn = async (e)=>{
    e.preventDefault();
+
+   if (!role){
+    setRoleError("Role must be specified");
+    return;
+  }
+  else {
+    setRoleError("");
+  }
+ 
    try {
     await signIn(email, password);
     toast.success('Logged in successfully');
@@ -28,6 +47,9 @@ const SignInForm = ({onSwitch}) => {
         <h2 className='text-2xl font-bold text-center text-gray-800 mb-6'>
           Login
         </h2>
+      {roleError && (
+        <p className='text-red-500 text-sm mb-1'>{roleError}</p>
+      )}
 
         <div className='mb-4'>
           <label
@@ -70,6 +92,19 @@ const SignInForm = ({onSwitch}) => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
         </div>
+
+        <div className="mb-2">
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="select role">Select role</option>
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="vendor">Vendor</option>
+            </select>
+          </div>
 
         <div className='flex flex-col gap-5'>
           <button
