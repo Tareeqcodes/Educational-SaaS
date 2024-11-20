@@ -81,7 +81,7 @@ const Dashboard = () => {
   return (
     <div className="flex h-screen">
       <Sidebar signOut={signOut} role={role}/>
-      <DashboardContent user={role} />
+      <DashboardContent user={user} role={role} />
     </div>
   );
 };
