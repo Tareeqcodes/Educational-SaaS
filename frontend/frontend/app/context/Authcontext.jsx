@@ -11,6 +11,7 @@ export function useUser() {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(localStorage.getItem("userRole") || "");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -23,13 +24,14 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, role) => {
     try {
       await account.create(ID.unique(), email, password);
+      localStorage.setItem("userRole", role);
+      setRole(role);
       await sendVerificationEmail();
       toast.success('Account created');
-     
-      return signIn()
+      return signIn(email, password);
     } catch (error) {
       console.error("Sign-up error:", error);
     }
@@ -40,6 +42,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.createEmailPasswordSession(email, password);
       await checkUsersStatus();
+      const storedRole = localStorage.getItem("userRole");
+      setRole(storedRole);
       navigate("/")
     } catch (error) {
       console.log("sign-in error", error)
@@ -51,11 +55,16 @@ export const AuthProvider = ({ children }) => {
   const checkUsersStatus = async () => {
      try {
       const userDetails = await account.get();
-      // console.log('fetch users details', userDetails);
       setUser(userDetails);
+      const storedRole = localStorage.getItem("userRole");
+      setRole(storedRole || "");
      } catch (error) {
-      
-     }
+      if(error.code===401){
+       setUser(null);
+      } else{
+        console.error("check users status error:", error);
+ 
+     }}
   }
 
   const sendVerificationEmail = async () => {
@@ -71,6 +80,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.deleteSession("current");
       setUser(null);
+      setRole("");
+      localStorage.removeItem("userRole");
       navigate("/");
       toast.success("Signed out successfully.");
     } catch (error) {
@@ -79,7 +90,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, role, loading, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

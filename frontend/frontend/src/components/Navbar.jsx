@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link} from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
-import NavItems from './Homepage/NavItems';
 import logo from '../assets/images/logo.svg';
 import { useAuth } from '../../app/context/Authcontext';
+import NavItems  from './Hamburger/NavItems';
 
 
 const Navbar = () => {
@@ -13,12 +13,12 @@ const Navbar = () => {
   return (
     <>
     <nav
-      className="hidden md:flex fixed top-0 left-0 w-full h-16 bg-gray-100 items-center px-8 z-50">
-      <div className=" mx-auto flex flex-1 justify-between items-center">
+      className="hidden md:block fixed top-0 left-0 w-full  bg-gray-100 text-center px-8 z-50">
+      <div className=" mx-auto flex flex-1 justify-between items-center text-center">
          <Link to='/'>
-         <img src={logo} alt="logo" className='h-12 w-12'/>
+         <img src={logo} alt="logo" className=' w-12'/>
          </Link>
-        <NavItems />
+         <NavItems />
         {user ? (
            <Link to="/profile" className="bg-blue-500 text-white py-1 px-2 rounded">
             <FaUser />

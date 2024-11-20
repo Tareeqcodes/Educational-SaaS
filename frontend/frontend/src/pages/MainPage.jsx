@@ -5,13 +5,13 @@ import FeatureCards from '../components/Homepage/FeatureCards';
 import About from '../components/Homepage/About';
 const MainPage = () => {
   return (
-    <div>
+    <section>
       
         <Header />
         <Hero />
         <About />
         <FeatureCards />
-    </div>
+    </section>
   )
 }
 

@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../app/context/Authcontext'
 
 const NavItems = () => {
+    const {user} = useAuth();
+    if (!user) return null;
   return (
-    
-        <div className='flex flex-row'>
+    <div className='flex flex-row'>
           <Link className="px-3 font-bold" to="/pdfs">
           PDFs
           </Link>

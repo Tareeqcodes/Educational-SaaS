@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../../app/context/Authcontext';
 import { toast } from 'react-toastify';
 
 
 const SignInForm = ({onSwitch}) => {
+  const userRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -12,13 +13,12 @@ const SignInForm = ({onSwitch}) => {
   const [roleError, setRoleError] = useState("");
   const { signIn } = useAuth();
 
-  // const checkRole = async ()=>{
-  //   if (role === 'student'){
-
-  //   }
-  // }
 
   
+  useEffect(() => {
+    userRef.current.focus();
+}, []) 
+
 
   const handleSignIn = async (e)=>{
    e.preventDefault();
@@ -65,6 +65,7 @@ const SignInForm = ({onSwitch}) => {
             className='border rounded w-full py-2 px-3'
             autoComplete='email'
             required
+            ref={userRef}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>

@@ -17,7 +17,7 @@ const MainLayout = () => {
         <Outlet />
         </div>
        <Footer className="hidden md:block" />
-       <BottomNav />
+       <BottomNav className='block md:hidden'/>
        <ToastContainer />
     </div>
     </>

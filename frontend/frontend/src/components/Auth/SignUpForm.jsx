@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../../app/context/Authcontext';
 
@@ -12,41 +12,67 @@ const ErrorMessages = ({ errors }) => (
 );
 
 const SignUpForm = ({ onSwitch }) => {
+  const userRef = useRef();
+  const errRef = useRef();
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [role, setRole] = useState("student");
-  const [errors, setErrors] = useState([]);
+
+  const [errMsg, setErrMsg] = useState([]);
   const { signUp } = useAuth();
+  const [role, setRole] = useState("");
+
+
+  useEffect(() => {
+    userRef.current.focus();
+}, [])
+
+useEffect( () => {
+  setErrMsg('');
+}, [email, password, confirmPassword]);
 
   const validateForm = () => {
     const validationErrors = [];
-    const emailPattern = /^[a-zA-Z]+[0-9]*@[\gmail]+\.com/;
-    // /^[a-zA-Z]+[0-9]*@[\w.-]+\.edu\.ng$/
 
-    if (role === 'lecturer' && !emailPattern.test(email)) {
-      validationErrors.push('Please use a valid lecturer email');
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+    if (!passwordPattern.test(password)) {
+      validationErrors.push('Password must be 8-24 characters and include uppercase, lowercase, numbers, and a special character (!@#$%).');
     }
-
     if (password !== confirmPassword) {
       validationErrors.push('Passwords do not match');
     } 
-
-    setErrors(validationErrors);
+    if (!role) {
+      validationErrors.push('Please select a role');
+    }
+   
+    setErrMsg(validationErrors);
     return validationErrors.length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+     if (!validateForm())
+        return;
   
     try {
-      await signUp(email, password);
+      await signUp(email, password, role);
     } catch (error) {
-      console.error(error);
-      setErrors([error.message || 'Signup failed']);
+      const errorMessage = error.message || 'Signup failed';
+      
+      if(errorMessage.includes('invalid `password` Password must be between 8 and 265 characters long, and should not be one of the commonly used password. ')){
+        setErrMsg(['invald email or password']);
+      } else if(errorMessage.includes(' A user with the same id, email, or phone already exists in this project.')){
+        setErrMsg(['This email is already in used']);
+      }
+       else{
+        setErrMsg([errorMessage]);
+      }
+      
     }
   };
   
@@ -57,7 +83,7 @@ const SignUpForm = ({ onSwitch }) => {
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-black mb-1'>Sign Up</h2>
 
-          {errors.length > 0 && <ErrorMessages errors={errors} />}
+          {errMsg.length > 0 &&  <ErrorMessages errors={errMsg} />}
 
           <div className='mb-2'>
             <label htmlFor='email' className='block text-sm text-black font-bold mb-2'>Email</label>
@@ -66,13 +92,13 @@ const SignUpForm = ({ onSwitch }) => {
               name='email'
               placeholder='Email'
               className='border rounded w-full py-2 px-3'
-              autoComplete='email'
+              autoComplete='on'
+              ref={userRef} 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-
           <div className='relative mb-2'>
             <label htmlFor='password' className='block text-sm text-black font-bold mb-2'>Password</label>
             <input
@@ -92,7 +118,6 @@ const SignUpForm = ({ onSwitch }) => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-
           <div className='relative mb-6'>
             <label htmlFor='confirm-password' className='block text-sm text-black font-bold mb-2'>Confirm Password</label>
             <input
@@ -112,23 +137,17 @@ const SignUpForm = ({ onSwitch }) => {
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-
-          <div className="mb-2">
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="student">Student</option>
-              <option value="lecturer">Lecturer</option>
-              <option value="vendor">Vendor</option>
-            </select>
-          </div>
-
+         <div className='w-full p-2 my-2'>
+          <select value={role} onChange={(e) => setRole(e.target.value)} required >
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="lecturer">Lecturer</option>
+      </select>
+      </div>
           <div className='flex flex-col gap-5'>
             <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
             <p className='text-black'>
-              Already have an account?{' '}
+              Already have an account?
               <span onClick={onSwitch} className="text-green-600 cursor-pointer">Login</span>
             </p>
           </div>
