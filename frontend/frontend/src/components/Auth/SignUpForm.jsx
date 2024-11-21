@@ -47,7 +47,7 @@ useEffect( () => {
       validationErrors.push('Passwords do not match');
     } 
     if (!role) {
-      validationErrors.push('Please select a role');
+      validationErrors.push('Please select a role!');
     }
    
     setErrMsg(validationErrors);
@@ -79,7 +79,7 @@ useEffect( () => {
 
   return (
     <div className='flex items-center min-w-96 justify-center'>
-      <div className='bg-white shadow-lg rounded-lg p-4 w-full mt-20'>
+      <div className='bg-white shadow-lg rounded-lg p-4 w-full mt-1'>
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-black mb-1'>Sign Up</h2>
 
@@ -137,13 +137,18 @@ useEffect( () => {
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-         <div className='w-full p-2 my-2'>
-          <select value={role} onChange={(e) => setRole(e.target.value)} required >
-        <option value="">Select Role</option>
-        <option value="student">Student</option>
-        <option value="lecturer">Lecturer</option>
-      </select>
-      </div>
+          <div className="mb-2">
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="select role">Select role</option>
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="vendor">Vendor</option>
+            </select>
+          </div>
           <div className='flex flex-col gap-5'>
             <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
             <p className='text-black'>

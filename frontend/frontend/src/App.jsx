@@ -35,7 +35,7 @@ function App() {
        <Route path='/pdfs' element= {<PdfPage />} />
        <Route path='/Rental' element={< Rental />} />
        <Route path='/marketplace' element= {<Store />} />
-       <Route path='/profile' element= {<Profile />} />
+       <Route path='/profile/*' element= {<Profile />} />
        </Route>
     </Route>
      </Routes>

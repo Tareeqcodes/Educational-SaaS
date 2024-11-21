@@ -6,7 +6,7 @@ import SignUpForm from '../components/Auth/SignUpForm'
 const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   return (
-    <div className='flex h-screen items-center justify-center text-justify'>
+    <div className='flex h-screen  justify-center text-justify'>
          {isSignIn ? (
         <SignInForm onSwitch={() => setIsSignIn(false)} />
       ) : (
