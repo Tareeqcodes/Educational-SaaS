@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { account, ID } from '../config/appwrite';
 
@@ -11,24 +12,47 @@ export function useUser() {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(localStorage.getItem("userRole") || "");
+  // const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+ 
+
+  // const lectureId = import.meta.env.VITE_LECTURER_TEAM_ID;
+
   useEffect(() => {
     const checkAuth = async () => {
-      checkUsersStatus();
+      const token = Cookies.get('auth_token');
+      if(token){
+        try {
+          await checkUsersStatus();
+        } catch (error) {
+          console.log("cookies:", error)
+        }
+      }
       setLoading(false);
     };
-
     checkAuth();
   }, []);
 
-  const signUp = async (email, password, role) => {
+  const signUp = async (email, password) => {
     try {
       await account.create(ID.unique(), email, password);
-      localStorage.setItem("userRole", role);
-      setRole(role);
+    //    const userId = newUser.$id;
+    //    await account.createEmailPasswordSession(email, password);
+    // console.log('Session created successfully');
+
+    //  if(role === 'lecturer'){
+    //    const confirmUrl =  `http://localhost:3000/teams/confirm?userId=${newUser.$id}&teamId=${lectureId}`
+    //   await teams.createMembership(
+    //     lectureId,
+    //     ['member'],
+    //      email,
+    //      userId,
+    //      confirmUrl
+    //   ); console.log('lecturer added to', lectureId);
+    //  }
+      
       await sendVerificationEmail();
       toast.success('Account created');
       return signIn(email, password);
@@ -41,23 +65,32 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       await account.createEmailPasswordSession(email, password);
+      const session = await account.getSession("current");
+      Cookies.set("auth_token", session.$id, { expires: 7 });
       await checkUsersStatus();
-      const storedRole = localStorage.getItem("userRole");
-      setRole(storedRole);
       navigate("/")
     } catch (error) {
       console.log("sign-in error", error)
     }
-    
-    
   };
+
 
   const checkUsersStatus = async () => {
      try {
       const userDetails = await account.get();
       setUser(userDetails);
-      const storedRole = localStorage.getItem("userRole");
-      setRole(storedRole || "");
+
+      // if (!lectureId) {
+      //   console.error('Team IDs are not properly set. Check your environment variables.');
+      //   return;
+      // }
+      // const lecturerMemberships = await teams.listMemberships(
+      //   lectureId
+      // );
+      
+      // const isLecturer = lecturerMemberships.memberships.some(
+      //   (membership) => membership.userId === userDetails.$id
+      // );
      } catch (error) {
       if(error.code===401){
        setUser(null);
@@ -69,7 +102,9 @@ export const AuthProvider = ({ children }) => {
 
   const sendVerificationEmail = async () => {
     try {
-      const response = await account.createVerification('https://your-redirect-url.com/verify');
+      const user = await account.get();
+      console.log("current user:", user)
+      const response = await account.createVerification('http://localhost:3000/');
       console.log("Verification email sent:", response);
     } catch (error) {
       console.error("Verification error:", error);
@@ -79,9 +114,8 @@ export const AuthProvider = ({ children }) => {
   const signOut = async () => {
     try {
       await account.deleteSession("current");
+      Cookies.remove('auth_token');
       setUser(null);
-      setRole("");
-      localStorage.removeItem("userRole");
       navigate("/");
       toast.success("Signed out successfully.");
     } catch (error) {
@@ -90,7 +124,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, role, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,11 +1,18 @@
-import React from 'react'
+import RingLoader from 'react-spinners/RingLoader';
 
-const Spinner = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-    </div>
-  );
+const override = {
+  display: 'block',
+  margin: '200px auto',
 };
 
+const Spinner = ({ loading }) => {
+  return (
+    <RingLoader
+      color='#fff'
+      loading={loading}
+      cssOverride={override}
+      size={150}
+    />
+  );
+};
 export default Spinner;

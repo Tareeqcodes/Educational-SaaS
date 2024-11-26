@@ -4,7 +4,7 @@ import { useAuth } from '../../../app/context/Authcontext';
 
 
 const ErrorMessages = ({ errors }) => ( 
-  <ul className="text-red-500 text-sm">
+  <ul className="text-red-500 text-sm space-y-1">
     {errors.map((error, index) => (
       <li key={index}>{error}</li>
     ))}
@@ -13,7 +13,6 @@ const ErrorMessages = ({ errors }) => (
 
 const SignUpForm = ({ onSwitch }) => {
   const userRef = useRef();
-  const errRef = useRef();
 
   const [email, setEmail] = useState("");
 
@@ -24,7 +23,7 @@ const SignUpForm = ({ onSwitch }) => {
 
   const [errMsg, setErrMsg] = useState([]);
   const { signUp } = useAuth();
-  const [role, setRole] = useState("");
+  // const [role, setRole] = useState("");
 
 
   useEffect(() => {
@@ -35,10 +34,15 @@ useEffect( () => {
   setErrMsg('');
 }, [email, password, confirmPassword]);
 
-  const validateForm = () => {
+    const validateForm = () => {
     const validationErrors = [];
-
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+
+    if (!emailPattern.test(email)) {
+      validationErrors.push('Please enter a valid email address.');
+    }
 
     if (!passwordPattern.test(password)) {
       validationErrors.push('Password must be 8-24 characters and include uppercase, lowercase, numbers, and a special character (!@#$%).');
@@ -46,9 +50,9 @@ useEffect( () => {
     if (password !== confirmPassword) {
       validationErrors.push('Passwords do not match');
     } 
-    if (!role) {
-      validationErrors.push('Please select a role!');
-    }
+    // if (!role) {
+    //   validationErrors.push('Please select a role!');
+    // }
    
     setErrMsg(validationErrors);
     return validationErrors.length === 0;
@@ -60,7 +64,7 @@ useEffect( () => {
         return;
   
     try {
-      await signUp(email, password, role);
+      await signUp(email, password);
     } catch (error) {
       const errorMessage = error.message || 'Signup failed';
       
@@ -137,18 +141,20 @@ useEffect( () => {
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
               className="p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="select role">Select role</option>
+              <option value="" disabled>
+                    Select your role
+              </option>
               <option value="student">Student</option>
               <option value="lecturer">Lecturer</option>
-              <option value="vendor">Vendor</option>
+              
             </select>
-          </div>
+          </div> */}
           <div className='flex flex-col gap-5'>
             <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
             <p className='text-black'>

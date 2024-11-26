@@ -7,10 +7,10 @@ const PrivateRoute = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <Spinner />// Optional: Add a loading spinner here
+    return <Spinner />
   }
 
-  return user ? <Outlet /> : <Navigate to="/Auth" />;
+  return user ? <Outlet />  : <Navigate to="/Auth" />;
 };
 
 export default PrivateRoute;

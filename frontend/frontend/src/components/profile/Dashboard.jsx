@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { FaUniversity, FaNewspaper, FaDollarSign, FaChartLine, FaFileUpload, FaSignOutAlt } from 'react-icons/fa';
 import { useAuth } from '../../../app/context/Authcontext';
 import SignInForm from '../Auth/SignInForm';
-import Upload from '../Storage/Upload';
+import Upload from '../../../app/Marketplace/Upload';
+import Spinner from '../Spinner';
 
-const Sidebar = ({ signOut, role, onSelectSection }) => {
+const Sidebar = ({ user, signOut, onSelectSection }) => {
+
   return (
-    <div className="w-1/4 bg-blue-900 text-white h-full items-center justify-center mt-10 p-6">
-      <ul className="space-y-1 items-center">
+    <div className="w-1/4 bg-blue-900 text-white h-full items-center justify-center pt-20 px-6">
+       {user && (
+          <p className='flex flex-col p-5'>
+            <strong>Email:</strong> {user.email}
+          </p>
+       
+      )}
+      <ul className=" items-center">
         <li
           className="flex items-center hover:bg-blue-700 p-3 rounded cursor-pointer"
           onClick={() => onSelectSection('campusConnect')}
@@ -36,15 +44,13 @@ const Sidebar = ({ signOut, role, onSelectSection }) => {
           <FaChartLine className="mr-3" />
           <span>Activity</span>
         </li>
-        {role === 'lecturer' && (
           <li
             className="flex items-center hover:bg-blue-700 p-3 rounded cursor-pointer"
             onClick={() => onSelectSection('upload')}
           >
             <FaFileUpload className="mr-3" />
-            <span>Upload PDF</span>
+            <span>Add Room</span>
           </li>
-        )}
       </ul>
       <button
         className="flex items-center justify-center bg-red-500 text-white px-4 py-2 mt-6 rounded hover:bg-red-700"
@@ -57,17 +63,10 @@ const Sidebar = ({ signOut, role, onSelectSection }) => {
   );
 };
 
-const DashboardContent = ({ user, selectedSection }) => {
+const DashboardContent = ({ selectedSection }) => {
   return (
-    <div className="w-3/4 p-8 flex flex-col bg-gray-10 text-center justify-center">
-      <h1 className="text-2xl font-bold text-blue-900">Welcome to Your Dashboard</h1>
-      {user && (
-        <div>
-          <p className="text-gray-700">
-            <strong>Email:</strong> {user.email}
-          </p>
-        </div>
-      )}
+    <div className="w-3/4 p-8 flex flex-col bg-gray-10 text-center justify-center overflow-hidden">
+     
       {selectedSection === 'campusConnect' && (
         <div className="mt-6">
           <h2 className="text-lg font-bold text-gray-800">Campus Connect</h2>
@@ -93,9 +92,9 @@ const DashboardContent = ({ user, selectedSection }) => {
         </div>
       )}
       {selectedSection === 'upload' && (
-        <div className="mt-6">
-          <h2 className="text-lg font-bold text-gray-800">Upload Section</h2>
-          <p className="text-gray-600">You can upload your lecture materials here.</p>
+        <div className="mt-6 flex-grow h-full overflow-hidden">
+          {/* <h2 className="text-lg font-bold text-gray-800">Upload Section</h2>
+          <p className="text-gray-600">You can upload your lecture materials here.</p> */}
           <Upload />
         </div>
       )}
@@ -104,15 +103,15 @@ const DashboardContent = ({ user, selectedSection }) => {
 };
 
 const Dashboard = () => {
-  const { user, role, loading, signOut } = useAuth();
-  const [selectedSection, setSelectedSection] = useState('campusConnect'); // Default section
+  const { user, loading, signOut } = useAuth();
+  const [selectedSection, setSelectedSection] = useState('campusConnect');
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (!user) return <SignInForm />;
 
   return (
     <div className="flex h-screen">
-      <Sidebar signOut={signOut} role={role} onSelectSection={setSelectedSection} />
+      <Sidebar user={user} signOut={signOut} onSelectSection={setSelectedSection} />
       <DashboardContent user={user} selectedSection={selectedSection} />
     </div>
   );
