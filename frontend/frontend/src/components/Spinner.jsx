@@ -8,7 +8,7 @@ const override = {
 const Spinner = ({ loading }) => {
   return (
     <RingLoader
-      color='#fff'
+      color='#333'
       loading={loading}
       cssOverride={override}
       size={150}

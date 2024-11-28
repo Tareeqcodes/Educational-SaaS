@@ -2,7 +2,7 @@ import React from 'react'
 
 const FeatureCards = () => {
   return (
-    <div className='items-center text-white justify-center text-center'>
+    <div className='items-center  justify-center text-center'>
         <h2 className='font-bold text-2xl md:text-4xl py-5'>Our Features</h2>
          
     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-0 mx-auto text-center  items-center justify-center">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUniversity, FaNewspaper, FaDollarSign, FaChartLine, FaFileUpload, FaSignOutAlt } from 'react-icons/fa';
 import { useAuth } from '../../../app/context/Authcontext';
 import SignInForm from '../Auth/SignInForm';
-import Upload from '../../../app/Marketplace/Upload';
+import UploadRoom from '../../../app/Rental/UploadRoom';
 import Spinner from '../Spinner';
 
 const Sidebar = ({ user, signOut, onSelectSection }) => {
@@ -92,10 +92,10 @@ const DashboardContent = ({ selectedSection }) => {
         </div>
       )}
       {selectedSection === 'upload' && (
-        <div className="mt-6 flex-grow h-full overflow-hidden">
+        <div className="mt-5 overflow-y-auto">
           {/* <h2 className="text-lg font-bold text-gray-800">Upload Section</h2>
           <p className="text-gray-600">You can upload your lecture materials here.</p> */}
-          <Upload />
+          <UploadRoom />
         </div>
       )}
     </div>

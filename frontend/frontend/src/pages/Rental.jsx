@@ -1,9 +1,13 @@
 import React from 'react'
-
+import Rent from '../../app/Rental/Rent'
 
 const Rental = () => {
+
   return (
-    <div className='mt-9 text-center flex h-screen justify-center items-center text-white'><h1>Rental</h1></div>
+    <div className='min-h-screen  mt-5 pt-20 text-center justify-center'>
+      <h1 className='font-bold text-3xl'>Find the Perfect Hostels with us</h1>
+      <Rent />
+    </div>
   )
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Upload = () => {
+const UploadRoom = () => {
   return (
-    <div className='text-justify h-full overflow-y-auto'>
+    <div className='text-justify h-full'>
     <h2 className='text-3xl mb-3 mt-5 ml-4 shadow-sm font-bold'>Add Room</h2>
     <div className='shadow-lg w-full p-5'>
       <form action="">
@@ -17,7 +17,7 @@ const Upload = () => {
               type='text'
               id='name'
               name='name'
-              className='border rounded w-full py-1 px-1'
+              className='border rounded w-full py-2 px-3'
               placeholder='Enter a name (Large Conference Room)'
               required
             />
@@ -38,18 +38,18 @@ const Upload = () => {
             ></textarea>
           </div>
           <div className='mb-4'>
-            <label
-              htmlFor='sqft'
+            <label 
+              htmlFor='amenities'
               className='block text-gray-700 font-bold mb-2'
             >
-              Square Feet
+              Amenities
             </label>
             <input
-              type='number'
-              id='sqft'
-              name='sqft'
+              type='text'
+              id='amenities'
+              name='amenities'
               className='border rounded w-full py-2 px-3'
-              placeholder='Enter room size in ft'
+              placeholder='Amenities CSV (projector, whiteboard, etc.)'
               required
             />
           </div>
@@ -84,39 +84,40 @@ const Upload = () => {
               placeholder='Location (Building, Floor, Room)'
               required
             />
-             <div className='mb-4'>
-            <label
-              htmlFor='amenities'
-              className='block text-gray-700 font-bold mb-2'
-            >
-              Amenities
-            </label>
-            <input
-              type='text'
-              id='amenities'
-              name='amenities'
-              className='border rounded w-full py-2 px-3'
-              placeholder='Amenities CSV (projector, whiteboard, etc.)'
-              required
-            />
-          </div>
+             
           <div className='mb-4'>
             <label
-              htmlFor='price_per_hour'
+              htmlFor='price'
               className='block text-gray-700 font-bold mb-2'
             >
               Price
             </label>
             <input
               type='number'
-              id='price_per_hour'
-              name='price_per_hour'
+              id='price'
+              name='price'
               className='border rounded w-full py-2 px-3'
               placeholder='Enter price per hour'
               required
             />
           </div>
-          {/* image upload */}
+          <div className='mb-4'>
+            <label
+              htmlFor='contact'
+              className='block text-gray-700 font-bold mb-2'
+            >
+              Contact-Info
+            </label>
+            <input
+              type='number'
+              id='contact'
+              name='contact'
+              className='border rounded w-full py-2 px-3'
+              placeholder='Enter contact info '
+              required
+            />
+          </div>
+          {/* image UploadRoom */}
           <div className='mb-8'>
             <label
               htmlFor='image'
@@ -147,4 +148,4 @@ const Upload = () => {
   )
 }
 
-export default Upload
+export default UploadRoom

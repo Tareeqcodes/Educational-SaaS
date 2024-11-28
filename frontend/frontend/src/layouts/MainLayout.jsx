@@ -10,7 +10,7 @@ import TopNav from '../components/Hamburger/TopNav'
 const MainLayout = () => {
   return (
     <>
-    <div className="flex flex-col bg-black min-h-screen">
+    <div className="flex flex-col min-h-screen">
         <TopNav />
         <Navbar />
         <div className="flex-grow">
