@@ -19,7 +19,7 @@ const Rent = () => {
         setDocuments(rooms.documents);
         setLoading(false);
       } catch (err) {
-        setError(error.message);
+        setError(err.message);
         setLoading(false);
       }
     };
