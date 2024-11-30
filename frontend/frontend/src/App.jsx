@@ -16,6 +16,7 @@ import Store from './pages/Store';
 import NotFoundPage from './components/NotFoundPage';
 import { AuthProvider } from '../app/context/Authcontext';
 import PrivateRoute from './components/routes/PrivateRoutes';
+import RoomPage from './pages/RoomPage';
 
 
 const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
@@ -36,6 +37,7 @@ function App() {
        <Route path='/Rental' element={< Rental />} />
        <Route path='/marketplace' element= {<Store />} />
        <Route path='/profile/*' element= {<Profile />} />
+       <Route path='/roomPage' element={<RoomPage />} />
        </Route>
     </Route>
      </Routes>

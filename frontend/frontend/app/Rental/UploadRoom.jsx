@@ -78,12 +78,10 @@ const UploadRoom = () => {
       }
   }
   
-
-
   return (
-    <div className='text-justify h-full'>
-    <h2 className='text-3xl mb-3 mt-5 ml-4 shadow-sm font-bold'>Add Room</h2>
-    <div className='shadow-lg w-full p-5'>
+    <div className='text-center h-full overflow-y-scroll'>
+    <h2 className='text-2xl shadow-sm my-3 py-5 font-semibold'>Add Room</h2>
+    <div className='shadow-lg text-justify w-full md:w-20 p-1'>
       <form onSubmit={handleSubmit}>
       <div className='mb-4'>
             <label

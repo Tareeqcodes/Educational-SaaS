@@ -4,6 +4,7 @@ import{databases} from '../config/appwrite'
 import Spinner from '../../src/components/Spinner'
 import RoomCard from './RoomCard'
 
+
 const Rent = () => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ const Rent = () => {
 
   return (
     <>
+     
     {
       documents.length > 0 ? (
         documents.map((room) => <RoomCard room={room} key={room.$id} />)

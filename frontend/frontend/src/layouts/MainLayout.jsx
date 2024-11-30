@@ -16,7 +16,7 @@ const MainLayout = () => {
         <div className="flex-grow">
         <Outlet />
         </div>
-       <Footer className="hidden md:block" />
+       <Footer />
        <BottomNav className='block md:hidden'/>
        <ToastContainer />
     </div>

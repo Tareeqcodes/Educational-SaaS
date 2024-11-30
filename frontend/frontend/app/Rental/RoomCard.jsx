@@ -1,46 +1,54 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import { FaMapMarker } from 'react-icons/fa';
+import { Link } from 'react-router-dom'
 
 const RoomCard = ({room}) => {
-    const databaseId = import.meta.env.VITE_DATABASE_ID
-    const bucketId = import.meta.env.VITE_STORAGE_ID
+  const bucketId = import.meta.env.VITE_STORAGE_ID
+    const projectId = import.meta.env.VITE_APPWRITE_PROJECT_ID
 
-    const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${databaseId}`;
+    const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`;
 
-    const imageSrc = room.image ? imageUrl : '/images/no-image.jpg';
+    
+
+    const imageSrc = room.image ? imageUrl : '/no-image.jpg';
 
   return (
-    <div className='bg-white shadow-lg rounded-lg mt-4 text-start justify-between'>
-        <div className='flex flex-row items-center p-5 justify-between'>
-        <img
+    <div className='py-3'>
+        <div className='flex flex-col shadow-lg rounded-lg items-center p-5 justify-between'>
+          <Link to= "/roomPage" >
+          <img
           src={imageSrc}
-          width={400}
-          height={100}
+          width={300}
           alt={room.name}
-          className='w-full sm:w-32 sm:h-32 mb-3 sm:mb-0 object-cover rounded-lg'
+          className='w-96 sm:w-64 md:w-80 lg:w-96 rounded-lg object-cover'
         />
-       
-       <div className='space-y-1'>
+          </Link>
+       <div className='text-center'>
           <h4 className='text-lg font-semibold'>{room.name}</h4>
           <p className='text-sm text-gray-600'>
-            <span className='font-semibold text-gray-800'> Address:</span>{' '}
-            {room.address}
+            <span className='font-semibold text-gray-800'></span>₦
+            {room.price}/year
+          </p>
+          {/* <p className='text-sm flex flex-wrap items-center justify-center gap-2 text-gray-600'>
+            <span className='font-semibold text-gray-800'></span>{' '} 
+            <FaMapMarker /> 
+            {room.location}
+          </p> */}
+          <p className='text-sm text-gray-600'>
+            <span className='font-semibold text-gray-800'></span>{' '}
+            {room.amenities}
           </p>
           
-          <p className='text-sm text-gray-600'>
-            <span className='font-semibold text-gray-800'> Price:</span>$
-            {room.price}/hour
-          </p>
         </div>
       </div>
-      <div className='flex flex-col sm:flex-row w-full sm:w-auto sm:space-x-2 mt-2 sm:mt-0'>
-        {/* <Link
+      {/* <div className='flex flex-col sm:flex-row w-full sm:w-auto sm:space-x-2 mt-2 sm:mt-0'>
+        <Link
           
           className='bg-blue-500 text-white px-4 py-2 rounded mb-2 sm:mb-0 w-11 sm:w-auto text-center hover:bg-blue-700'
         >
           View Room
-        </Link> */}
-      </div>
+        </Link> 
+      </div> */}
     </div>
   )
 }
