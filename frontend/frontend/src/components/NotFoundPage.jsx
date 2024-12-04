@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
-    <section className='text-center bg-black justify-center items-center h-screen'>
-      <h1 className='text-6xl font-bold mb-4'>404 Not Found</h1>
+    <section className='text-cente pt-20  justify-center text-center items-center h-screen'>
+      <h1 className='text-2xl font-semibold mb-4'>404 Not Found</h1>
       <p className='text-xl mb-5'>This page does not exist</p>
       <Link
         to='/'

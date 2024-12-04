@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { account, ID } from '../config/appwrite';
+import Spinner from '../../src/components/Spinner'
 
 const AuthContext = createContext();
 export function useUser() {
@@ -64,9 +65,8 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      await account.createEmailPasswordSession(email, password);
-      const session = await account.getSession("current");
-      Cookies.set("auth_token", session.$id, { expires: 7 });
+      const session = await account.createEmailPasswordSession(email, password);
+      Cookies.set("auth_token", session.$id, { expires: 7, secure: true, sameSite: "strict" });;
       await checkUsersStatus();
       navigate("/")
     } catch (error) {
@@ -125,7 +125,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
-      {children}
+      {loading ? <Spinner /> : children}
     </AuthContext.Provider>
   );
 };

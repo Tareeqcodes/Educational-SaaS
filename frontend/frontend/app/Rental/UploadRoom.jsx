@@ -22,7 +22,7 @@ const UploadRoom = () => {
   const handleInputChange = (e) =>{
     const { name, value, files } = e.target;
     if (name === 'image') {
-      setFormData((prev) => ({ ...prev, image: files[0] })); // File input
+      setFormData((prev) => ({ ...prev, image: files[0] })); 
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -61,7 +61,7 @@ const UploadRoom = () => {
       location: formData.location,
       price: formData.price,
       contact: formData.contact,
-      image: imageID, // Save the File ID in the document
+      image: imageID, 
     };
       try {
         await databases.createDocument(

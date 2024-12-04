@@ -1,9 +1,13 @@
 import React from 'react'
+import  ViewRoom from '../../app/Rental/ViewRoom'
 
 const RoomPage = () => {
   return (
     <>
-    <h1 className='text-center text-black mt-60 justify-center items-center'>RoomPage</h1></>
+    <ViewRoom />
+    </>
+  
+    
   )
 }
 
