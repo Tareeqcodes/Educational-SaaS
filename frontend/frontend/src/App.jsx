@@ -4,8 +4,6 @@ import {
   Routes,
   BrowserRouter,
 } from 'react-router-dom';
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import { InstantSearch, SearchBox } from 'react-instantsearch';
 import MainLayout from './layouts/MainLayout';
 import MainPage from './pages/MainPage';
 import PdfPage from './pages/PdfPage';
@@ -18,8 +16,6 @@ import { AuthProvider } from '../app/context/Authcontext';
 import PrivateRoute from './components/routes/PrivateRoutes';
 import RoomPage from './pages/RoomPage';
 
-
-const searchClient = algoliasearch( 'BPV8JRUQT8', '3143add99d41a51eec3ad74225587acc')
 
 function App() {
   return (
@@ -41,8 +37,6 @@ function App() {
        </Route>
     </Route>
      </Routes>
-    <InstantSearch searchClient={searchClient} indexName="instant_search">  
-    </InstantSearch>
     </AuthProvider>
      </BrowserRouter>
   )

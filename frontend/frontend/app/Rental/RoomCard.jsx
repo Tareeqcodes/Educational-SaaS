@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaMapMarker } from 'react-icons/fa'
+import {FaMapMarkerAlt} from 'react-icons/fa'
+
 
 const RoomCard = ({room}) => {
   const bucketId = import.meta.env.VITE_STORAGE_ID
@@ -23,20 +24,17 @@ const RoomCard = ({room}) => {
 
     <div className='flex flex-col py-3 w-full'>
 
-          <h2 className='text-lg font-semibold'>{room.name}</h2>
-           <p className='text-md mt-4  justify-center font-medium'>
-            <span className='flex items-center justify-center gap-1'>
-            <FaMapMarker className='' />
-            {room.location}
+          <h2 className='text-md text-blue-700 font-semibold'>{room.name}</h2>
+           <p className='text-sm  mt-4  justify-center font-medium'>
+            <span className='flex text-orange-500 items-center justify-center gap-1'>
+            <FaMapMarkerAlt  className='text-orange-600' />
+            <span className="text-orange-400 font-medium text-sm">{room.location}.</span>
               </span>
           </p>
           
-          <Link to={`/roomPage/${room.$id}`} className='bg-slate-100  text-xl shadow-md rounded-md mt-3 border-2'>
+          <Link to={`/roomPage/${room.$id}`} className=" text-lg shadow-lg rounded-md py-1 mt-3 border-2">
             Rent
-          </Link>
-          
-          
-        
+          </Link>   
       
     </div>
     </section>

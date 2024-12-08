@@ -80,10 +80,10 @@ useEffect( () => {
     }
   };
   
-
+ 
   return (
     <div className='flex items-center min-w-96 justify-center'>
-      <div className='bg-white shadow-lg rounded-lg p-4 w-full mt-1'>
+      <div className='bg-white shadow-xl rounded-lg p-4 w-full mt-1'>
         <form onSubmit={handleSubmit}>
           <h2 className='text-2xl font-bold text-center text-black mb-1'>Sign Up</h2>
 

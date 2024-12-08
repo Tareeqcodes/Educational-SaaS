@@ -6,7 +6,7 @@ const About = () => {
       <h2 className="text-blue-700 font-bold text-4xl py-5">
         What's <span className='text-orange-600'>Edusphere</span>
       </h2>
-      <p className="text-center mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint?</p>
+      <p className="text-center mb-8">“EduSphere is a Web3-powered platform that redefines how students interact with their university environment. From easy access to PDFs and hostel bookings to earning Archway tokens for exclusive benefits, EduSphere makes academic and campus life more connected and rewarding.”</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center justify-center">  
         <div className="bg-gray-300 rounded-lg py-10 px-12 max-w-md mx-auto flex flex-col items-center justify-center">  

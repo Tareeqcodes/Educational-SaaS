@@ -9,7 +9,7 @@ const TopNav = () => {
   return (
     <nav className="fixed flex md:hidden top-0 w-full bg-gray-100 justify-between items-center text-center z-50 px-3">
       <Link to='/'>
-         <img src={logo} alt="logo" className='h-12 w- ml-1'/>
+         <img src={logo} alt="logo" className='h-12 w- ml-1 mt-1'/>
          </Link>
          {user ? (
            <Link to="/profile" className="bg-blue-500 text-white py-1 px-2 rounded">

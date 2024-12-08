@@ -32,7 +32,7 @@ const SignInForm = ({onSwitch}) => {
 
   return (
     <div className='flex items-center justify-center text-justify'>
-    <div className='bg-white text-black shadow-lg rounded-lg p-6 w-full min-w-96 mt-20'>
+    <div className='bg-white text-black shadow-xl rounded-lg p-6 w-full min-w-96 mt-20'>
       <form onSubmit={handleSignIn}>
         <h2 className='text-2xl font-bold text-center text-gray-800 mb-6'>
           Login

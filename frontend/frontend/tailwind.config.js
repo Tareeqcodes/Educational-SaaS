@@ -17,6 +17,16 @@ export default {
       borderRadius: {
         'custom-bl': '10px', 
       },
+      keyframes:{
+        slideIn: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        'slide-in': 'slideIn 1s ease-in-out',
+      },
+      
     },
   },
   plugins: [
