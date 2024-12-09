@@ -9,19 +9,17 @@ const searchClient = algoliasearch(appId, searchId);
 
 function AlgoliaSearch() {
   return (
-    <InstantSearch searchClient={searchClient} indexName="instant_search">
+    <InstantSearch searchClient={searchClient} indexName="edusphere_search">
       <div className="search-container relative">
-        {/* Search Input */}
         <SearchBox
-          translations={{ placeholder: 'Search...' }}
-          className="searchbox border rounded-md p-2 w-full max-w-xs shadow-md focus:ring-2 focus:ring-blue-500"
-        />
-
-        {/* Search Results */}
+        placeholder="Search items"
+          
+          className="searchbox border rounded-md w-full focus:ring-2 focus:ring-blue-500"
+        />    
         <div className="results-container absolute bg-white shadow-lg rounded-md mt-2 w-full max-w-xs z-50">
           <Hits hitComponent={Hit} />
-          <Pagination />
-        </div>
+          <Pagination className="mt-4" />
+        </div> 
       </div>
     </InstantSearch>
   );
