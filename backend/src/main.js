@@ -1,35 +1,65 @@
-import { Client, Users } from 'node-appwrite';
+import { Client, Databases } from 'node-appwrite';
+import algoliasearch from 'algoliasearch';
 
-// This Appwrite function will be executed every time your function is triggered
+
+const projectId = 'process.env.PROJECT_ID';
+const apiKey = 'process.env.API_KEY'
+
 export default async ({ req, res, log, error }) => {
-  // You can use the Appwrite SDK to interact with other services
-  // For this example, we're using the Users service
+  
   const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-    .setKey(req.headers['x-appwrite-key'] ?? '');
-  const users = new Users(client);
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(projectId)
+    .setKey(apiKey);
+  
+      
+    
+  const databases = new Databases(client);
+
+  const algoliaClient = algoliasearch(
+    process.env.ALGOLIA_APP_ID,  
+    process.env.ALGOLIA_ADMIN_ID 
+  );
+  const index = algoliaClient.initIndex('edusphere_search');
 
   try {
-    const response = await users.list();
-    // Log messages and errors to the Appwrite Console
-    // These logs won't be seen by your end users
-    log(`Total users: ${response.total}`);
-  } catch(err) {
-    error("Could not list users: " + err.message);
+    const payload = JSON.parse(req.body);
+    log(`Payload received: ${JSON.stringify(payload)}`);
+
+    const databaseId = process.env.DATABASE_ID;
+    const collectionId = process.env.COLLECTION_ID;
+
+    const document = await databases.getDocument(
+      databaseId,
+      collectionId, 
+      payload.$id 
+    );
+    
+    log(`Document fetched from Appwrite: ${JSON.stringify(document)}`);
+
+    if (
+         
+      req.headers['x-appwrite-event'] === 'databases.documents.create' ||
+      req.headers['x-appwrite-event'] === 'databases.documents.update'
+    ) {
+        
+      await index.saveObject({
+        objectID: document.$id, // Using the document's ID as the Algolia objectID
+        ...document,            // Include other document fields
+      });
+      log(`Document synced to Algolia: ${document.$id}`);
+    }
+
+    if (req.headers['x-appwrite-event'] === 'databases.documents.delete') {
+      await index.deleteObject(payload.$id);
+      log(`Document removed from Algolia: ${payload.$id}`);
+    }
+    return res.json({ success: true, message: 'Operation completed successfully.' });
+
+  } catch (err) {
+    error('Error during Algolia sync: ' + err.message);
+    return res.json({ success: false, message: 'Failed to sync data with Algolia.' });
   }
 
-  // The req object contains the request data
-  if (req.path === "/ping") {
-    // Use res object to respond with text(), json(), or binary()
-    // Don't forget to return a response!
-    return res.text("Pong");
-  }
-
-  return res.json({
-    motto: "Build like a team of hundreds_",
-    learn: "https://appwrite.io/docs",
-    connect: "https://appwrite.io/discord",
-    getInspired: "https://builtwith.appwrite.io",
-  });
+  
 };
