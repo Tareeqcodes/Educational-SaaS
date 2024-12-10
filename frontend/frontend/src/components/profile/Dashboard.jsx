@@ -34,7 +34,7 @@ const Sidebar = ({  signOut, onSelectSection }) => {
 
 const DashboardContent = ({ user, selectedSection }) => {
   return (
-    <div className=" p-8 justify-center overflow-y-scroll">
+    <div className=" p-8 my-10 justify-center overflow-y-scroll">
       <div className='flex flex-col items-center text-center max-h-96'>
       <img src={avatar} className='w-32 object-cover' alt="user.png" />
       {user && (

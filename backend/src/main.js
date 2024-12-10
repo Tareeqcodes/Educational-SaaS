@@ -17,15 +17,16 @@ export default async ({ req, res, log, error }) => {
   const index = algoliaClient.initIndex('edusphere_search');
 
   try {
-    // Parse the payload sent by the webhook
     const payload = JSON.parse(req.body);
     log(`Payload received: ${JSON.stringify(payload)}`);
 
-    // Fetch additional data from Appwrite Database if needed
+    const databaseId = process.env.VITE_DATABASE_ID;
+    const collectionId = process.env.VITE_COLLECTION_ID;
+
     const document = await databases.getDocument(
-      payload.databaseId, // Replace with actual database ID
-      payload.collectionId, // Replace with actual collection ID
-      payload.$id // Document ID
+      databaseId,
+      collectionId, 
+      payload.$id 
     );
 
     log(`Document fetched from Appwrite: ${JSON.stringify(document)}`);

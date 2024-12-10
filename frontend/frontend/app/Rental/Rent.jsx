@@ -19,8 +19,8 @@ const Rent = () => {
         );
         setDocuments(rooms.documents);
         setLoading(false);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        setError(error.message);
         setLoading(false);
       }
     };
