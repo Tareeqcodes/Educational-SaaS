@@ -1,38 +1,35 @@
-import { Client, Databases } from 'node-appwrite';
+import { Client } from 'node-appwrite';
 import algoliasearch from 'algoliasearch';
-
 
 export default async ({ req, res, log, error }) => {
   // Appwrite Client
   const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT) 
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)    
-    .setKey(req.headers['x-appwrite-key'] ?? '');            
+    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    .setKey(req.headers['x-appwrite-key'] ?? '');
 
-  const databases = new Databases(client);
-
+  // Algolia Client
   const algoliaClient = algoliasearch(
     process.env.ALGOLIA_APP_ID,
-    process.env.ALGOLIA_ADMIN_API_KEY
+    process.env.ALGOLIA_ADMIN_ID
   );
-  const index = algoliaClient.initIndex('edusphere_search'); 
+  const index = algoliaClient.initIndex('edusphere_search');
 
   try {
-    // Parse the event payload from Appwrite
     const payload = JSON.parse(req.body);
 
-    if (req.headers['x-appwrite-event'] === 'databases.documents.create' || 
-        req.headers['x-appwrite-event'] === 'databases.documents.update') {
-      // Add or update the document in Algolia
+    if (
+      req.headers['x-appwrite-event'] === 'databases.documents.create' ||
+      req.headers['x-appwrite-event'] === 'databases.documents.update'
+    ) {
       await index.saveObject({
-        objectID: payload.$id, // Map Appwrite document ID to Algolia objectID
-        ...payload,           // Spread all fields from the Appwrite document
+        objectID: payload.$id,
+        ...payload,
       });
       log(`Document synced to Algolia: ${payload.$id}`);
     }
 
     if (req.headers['x-appwrite-event'] === 'databases.documents.delete') {
-      // Remove the document from Algolia
       await index.deleteObject(payload.$id);
       log(`Document removed from Algolia: ${payload.$id}`);
     }
