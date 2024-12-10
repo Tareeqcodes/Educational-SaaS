@@ -1,17 +1,16 @@
 import { Client, Databases } from 'node-appwrite';
 import algoliasearch from 'algoliasearch';
 
-// Initialize Appwrite and Algolia clients
+
 export default async ({ req, res, log, error }) => {
   // Appwrite Client
   const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT) // Appwrite endpoint
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)    // Appwrite project ID
-    .setKey(req.headers['x-appwrite-key'] ?? '');            // Appwrite API key
+    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT) 
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)    
+    .setKey(req.headers['x-appwrite-key'] ?? '');            
 
   const databases = new Databases(client);
 
-  // Algolia Client
   const algoliaClient = algoliasearch(
     process.env.ALGOLIA_APP_ID,
     process.env.ALGOLIA_ADMIN_API_KEY

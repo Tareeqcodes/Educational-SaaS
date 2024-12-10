@@ -13,7 +13,7 @@ function AlgoliaSearch() {
       <div className="search-container relative">
         <SearchBox
         placeholder="Search items"
-          
+        translations={{ placeholder: 'Search items...' }}
           className="searchbox border rounded-md w-full focus:ring-2 focus:ring-blue-500"
         />    
         <div className="results-container absolute bg-white shadow-lg rounded-md mt-2 w-full max-w-xs z-50">
