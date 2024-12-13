@@ -54,17 +54,20 @@ const ViewRoom = () => {
 
   return (
     <div className="flex flex-col pt-20 items-center justify-center text-center">
-      <Link to="/rental" className="flex items-center mb-4">
+      <Link to="/rental" className="flex shadow-black p-2 shadow-md rounded-md items-center mb-4">
         <FaChevronLeft className="mr-1 inline" />
         <span className="ml-1">Back to Rentals</span>
       </Link>
-      <Heading title={room.name} />
-      <div className="shadow-md">
+      <h3 className='text-2xl mb-4 font-bold'>Property Details</h3>
+      
+      <div className="flex flex-col text-center items-center">
         <img
           src={imageUrl}
           alt={room.name}
-          className="w-64 md:w-80 rounded-lg object-cover"
+          className="w-80 md:w-80 rounded-lg object-cover"
         />
+        <div className='text-justify mx-6'>
+        <Heading title={room.name} />
         <p>{room.description}</p>
         <p>Price: ₦{room.price}</p>
         <p>Amenities: {room.amenities}</p>
@@ -78,6 +81,7 @@ const ViewRoom = () => {
         >
           <FaWhatsapp className="mr-2" /> Contact on WhatsApp
         </a>
+        </div>
       </div>
     </div>
   );

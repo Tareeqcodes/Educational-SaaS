@@ -3,9 +3,9 @@ import  ViewRoom from '../../app/Rental/ViewRoom'
 
 const RoomPage = () => {
   return (
-    <>
+    <section>
     <ViewRoom />
-    </>
+    </section>
   
     
   )
