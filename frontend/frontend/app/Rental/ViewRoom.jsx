@@ -34,8 +34,15 @@ const ViewRoom = () => {
     ? `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`
     : '/no-image.jpg';
 
+    const countryCode = '+234';
+    const formattedContact = room && room.contact ? (room.contact.startsWith('0')
+    ? countryCode + room.contact.slice(1)
+    : countryCode + room.contact) : '';
+
+
+
   const whatsappLink = room
-    ? `https://wa.me/${room.contact}?text=${encodeURIComponent(
+    ? `https://wa.me/${formattedContact}?text=${encodeURIComponent(
         `Hello, I am interested in your room listing: ${room.name}.`
       )}`
     : '#';
@@ -54,25 +61,27 @@ const ViewRoom = () => {
 
   return (
     <div className="flex flex-col pt-20 items-center justify-center text-center">
-      <Link to="/rental" className="flex shadow-black p-2 shadow-md rounded-md items-center mb-4">
+      <Link to="/rental" className="flex hover:bg-orange-500 hover:text-white p-2 shadow-md rounded-md items-center mb-4">
         <FaChevronLeft className="mr-1 inline" />
         <span className="ml-1">Back to Rentals</span>
       </Link>
-      <h3 className='text-2xl mb-4 font-bold'>Property Details</h3>
+      <h3 className='text-2xl mb-4 font-semibold'>Property Details</h3>
       
-      <div className="flex flex-col text-center items-center">
+      <div className="flex px-5 flex-col justify-center text-center items-center">
         <img
           src={imageUrl}
           alt={room.name}
-          className="w-80 md:w-80 rounded-lg object-cover"
+          width={400}
+          className="md:w-full rounded-lg object-cover"
         />
-        <div className='text-justify mx-6'>
+        <div className="text-justify px-10 py-5 md:py-8">
         <Heading title={room.name} />
-        <p>{room.description}</p>
-        <p>Price: ₦{room.price}</p>
-        <p>Amenities: {room.amenities}</p>
-        <p>Contact: {room.contact}</p>
-        <p>Location: {room.location}</p>
+        
+        <p className='text-xs font-medium mb-2'>{room.description}</p>
+        <p className="text-lg font-medium mb-2 text-green-500"><span className='text-lg font-semibold'>Price:</span> ₦{room.price}/year</p>
+        <p className="mb-2 text-lg font-medium"><span className='text-lg font-semibold'>Amenities:</span> {room.amenities}</p>
+        <p className="mb-2 text-lg font-medium"><span className='text-lg font-semibold'>Contact:</span> {room.contact}</p>
+        <p className='mb-2'><span className='text-lg font-semibold'>Location:</span> {room.location}</p>
         <a
           href={whatsappLink}
           target="_blank"

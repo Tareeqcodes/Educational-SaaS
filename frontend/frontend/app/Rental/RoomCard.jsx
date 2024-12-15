@@ -27,12 +27,13 @@ const RoomCard = ({room}) => {
           <h2 className='text-md text-blue-700 font-semibold'>{room.name}</h2>
            <p className='text-sm  mt-4  justify-center font-medium'>
             <span className='flex text-orange-500 items-center justify-center gap-1'>
-            <FaMapMarkerAlt  className='text-orange-600' />
+            <FaMapMarkerAlt   />
             <span className="text-orange-400 font-medium text-sm">{room.location}.</span>
               </span>
+              <span className="text-xl text-blue-600">₦{room.price}/year</span>
           </p>
           
-          <Link to={`/roomPage/${room.$id}`} className=" text-lg shadow-lg rounded-md py-1 mt-3 border-2">
+          <Link to={`/roomPage/${room.$id}`} className=" text-lg shadow-lg rounded-md hover:bg-blue-700 py-1 mt-3 border-2">
             Rent
           </Link>   
       
