@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../../app/context/Authcontext';
+import Spinner from '../Spinner';
 
 
 const ErrorMessages = ({ errors }) => ( 
@@ -20,7 +21,7 @@ const SignUpForm = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState([]);
   const { signUp } = useAuth();
   // const [role, setRole] = useState("");
@@ -61,7 +62,8 @@ useEffect( () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
      if (!validateForm())
-        return;
+      setLoading(true)
+    setErrMsg([]);
   
     try {
       await signUp(email, password);
@@ -75,8 +77,10 @@ useEffect( () => {
       }
        else{
         setErrMsg([errorMessage]);
-      }
-      
+      }   
+    }
+    finally {
+      setLoading(false);
     }
   };
   
@@ -156,7 +160,15 @@ useEffect( () => {
             </select>
           </div> */}
           <div className='flex flex-col gap-5'>
-            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
+        
+            {loading ? (
+               <div className="flex justify-center">
+               <Spinner /> {/* Show the spinner when loading */}
+             </div>
+            ) : (
+              <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400'>Sign Up</button>
+            )
+             }
             <p className='text-black'>
               Already have an account?
               <span onClick={onSwitch} className="text-green-600 cursor-pointer">Login</span>
